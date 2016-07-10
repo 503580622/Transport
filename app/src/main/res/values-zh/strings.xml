@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="jh_app_name">佳合代运</string>
+	<string name="jh_action_sign_in">登陆</string>
+	<string name="jh_error_field_required">此内容必须填写！</string>
+	<string name="jh_error_incorrect_password">密码不正确！</string>
+	<string name="jh_error_invalid_email">邮箱地址无效！</string>
+	<string name="jh_error_invalid_password">密码太短！</string>
+	<string name="jh_permission_rationale">abc</string>
+	<string name="jh_prompt_email">邮箱地址</string>
+	<string name="jh_prompt_password">密码</string>
+	<string name="jh_action_register">注册</string>
+</resources>
