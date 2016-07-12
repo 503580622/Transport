@@ -18,13 +18,13 @@ public class SplashActivity extends BasicActivity {
 
 
 	private final Handler mHideHandler = new Handler();
-
+	public String s;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_splash);
-
+		s.compareTo("a");
 
 	}
 }
