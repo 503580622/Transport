@@ -1,7 +1,6 @@
 package com.jiahelogistic.crash;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -10,8 +9,6 @@ import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.jiahelogistic.activity.SplashActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,22 +43,23 @@ public class CrashHandler implements UncaughtExceptionHandler {
 	// 用来存储设备信息和异常信息
 	private Map<String, String> infos = new HashMap<>();
 
-	// 用于格式化日期,作为日志文件名的一部分
+	/**
+	 * 用于格式化日期,作为日志文件名的一部分
+	 */
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH-mm-ss", Locale.CHINA);
 
-
 	/** 保证只有一个 CrashHandler 实例 */
-	private CrashHandler() {
-	}
+	private CrashHandler() { }
 
-	/** 获取 CrashHandler 实例 ,单例模式 */
+	/**
+	 *  获取 CrashHandler 实例 ,单例模式
+	 */
 	public static CrashHandler getInstance() {
 		return INSTANCE;
 	}
 
 	/**
 	 * 初始化
-	 *
 	 * @param context 应用程序上下文
 	 */
 	public void init(Context context) {
@@ -83,16 +81,15 @@ public class CrashHandler implements UncaughtExceptionHandler {
 			// 如果用户没有处理则让系统默认的异常处理器来处理
 			mDefaultHandler.uncaughtException(thread, ex);
 		} else {
+			// 如果自己处理了异常，退出app
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
-				Log.e(TAG, "error : ", e);
+				Log.e(TAG, e.toString());
 			}
-
-			// 退出程序,注释下面的重启启动程序代码
+			Log.e(TAG, "Ready To Exit Progress");
 			android.os.Process.killProcess(android.os.Process.myPid());
-			System.exit(0);
-
+			System.exit(10);
 		}
 	}
 
@@ -116,7 +113,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 				Looper.loop();
 			}
 		}.start();
-
+		Log.e(TAG, ex.getMessage());
 		// 收集设备参数信息
 		collectDeviceInfo(mContext);
 		// 保存日志文件
@@ -198,9 +195,12 @@ public class CrashHandler implements UncaughtExceptionHandler {
 						Log.e(TAG, "create dir failure");
 					}
 				}
-				FileOutputStream fos = new FileOutputStream(path + fileName);
-				fos.write(sb.toString().getBytes());
-				fos.close();
+				File file = new File(path + fileName);
+				if (file.exists()) {
+					FileOutputStream fos = new FileOutputStream(path + fileName);
+					fos.write(sb.toString().getBytes());
+					fos.close();
+				}
 			}
 
 			return fileName;

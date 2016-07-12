@@ -95,6 +95,20 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		stack.pop();
+	}
+
+	/**
+	 * 用于activity栈管理
+	 */
+	@Override
+	protected void LoadToStack() {
+		stack.push(this);
+	}
+
 	private void populateAutoComplete() {
 		if (!mayRequestContacts()) {
 			return;
