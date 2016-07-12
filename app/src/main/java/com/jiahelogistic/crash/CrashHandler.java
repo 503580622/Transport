@@ -10,6 +10,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.jiahelogistic.utils.Utils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -88,8 +90,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 				Log.e(TAG, e.toString());
 			}
 			Log.e(TAG, "Ready To Exit Progress");
-			android.os.Process.killProcess(android.os.Process.myPid());
-			System.exit(10);
+			Utils.Exit();
 		}
 	}
 

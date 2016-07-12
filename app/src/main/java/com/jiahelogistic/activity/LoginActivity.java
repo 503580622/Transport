@@ -70,6 +70,8 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 		mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 		populateAutoComplete();
 
+
+
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			@Override

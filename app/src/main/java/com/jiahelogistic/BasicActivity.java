@@ -1,18 +1,34 @@
 package com.jiahelogistic;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import java.util.Stack;
 
 public abstract class BasicActivity extends AppCompatActivity {
-	protected Stack<Activity> stack = new Stack<>();
+	/**
+	 * activity栈管理
+	 */
+	protected Stack<Activity> stack;
+
+	private String TAG = "BASIC_ACTIVITY";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// 获取application
+		JiaHeLogistic app = JiaHeLogistic.getInstance();
+		stack = app.getStack();
+
 		LoadToStack();
+		Log.e(TAG, "Start Trace");
+		for (Activity a : stack) {
+			Log.e(TAG, a.toString());
+		}
+		Log.e(TAG, "End Trace");
 	}
 
 	/**
