@@ -24,11 +24,6 @@ public abstract class BasicActivity extends AppCompatActivity {
 		stack = app.getStack();
 
 		LoadToStack();
-		Log.e(TAG, "Start Trace");
-		for (Activity a : stack) {
-			Log.e(TAG, a.toString());
-		}
-		Log.e(TAG, "End Trace");
 	}
 
 	/**

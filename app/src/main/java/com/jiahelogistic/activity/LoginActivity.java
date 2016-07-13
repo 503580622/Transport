@@ -104,21 +104,41 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 	}
 
 	private void uploadFile() {
-		File file = new File(Environment.getExternalStorageDirectory().getPath() + "/dump.txt");
-		if (!file.exists()) {
-			try {
-				file.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		Log.e(TAG, file.getAbsolutePath());
-		UploadFile uf = new UploadFile(file.getAbsolutePath());
 		try {
-			uf.run();
+			File file = getFilesDir();
+			if (!file.exists()) {
+				boolean result = file.createNewFile();
+				if (!result) {
+					Log.e(TAG, "create file failure");
+				}
+			} else {
+				File uploadFile = new File(file.getAbsolutePath() + "/dump.txt");
+				if (!uploadFile.exists()) {
+					boolean result = uploadFile.createNewFile();
+					if (result) {
+						beginUpload(uploadFile);
+					}
+				} else {
+					// 开始上传
+					if (uploadFile.isFile()) {
+						beginUpload(uploadFile);
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 开始上传
+	 * @param file 需要上传的文件
+	 */
+	private void beginUpload(File file) throws Exception {
+		UploadFile uf = new UploadFile(file.getAbsolutePath());
+		uf.run();
 	}
 
 	@Override

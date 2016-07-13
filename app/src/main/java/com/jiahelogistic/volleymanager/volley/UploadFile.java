@@ -1,5 +1,7 @@
 package com.jiahelogistic.volleymanager.volley;
 
+import android.util.Log;
+
 import com.jiahelogistic.config.NetConfig;
 
 import java.io.File;
@@ -18,6 +20,7 @@ import okhttp3.Response;
 public class UploadFile {
 	public static final MediaType MEDIA_TYPE_MARKDOWN
 			= MediaType.parse("text/x-markdown; charset=utf-8");
+	private static final String TAG = "UploadFile";
 
 	private final OkHttpClient client = new OkHttpClient();
 
@@ -30,17 +33,27 @@ public class UploadFile {
 		mFilename = filename;
 	}
 
-	public void run() throws Exception {
-		File file = new File(mFilename);
+	public void run() {
+		new Thread() {
+			@Override
+			public void run() {
+				super.run();
+				File file = new File(mFilename);
 
-		Request request = new Request.Builder()
-				.url(NetConfig.CRASH_FILE_UPLOAD_URL)
-				.post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
-				.build();
+				Request request = new Request.Builder()
+						.url(NetConfig.CRASH_FILE_UPLOAD_URL)
+						.post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
+						.build();
 
-		Response response = client.newCall(request).execute();
-		if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+				try {
+					Response response = client.newCall(request).execute();
+					if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
-		System.out.println(response.body().string());
+					Log.e(TAG, response.body().string());
+				} catch (IOException io) {
+					io.printStackTrace();
+				}
+			}
+		}.start();
 	}
 }
