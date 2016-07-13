@@ -12,10 +12,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,10 +27,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jiahelogistic.BasicActivity;
 import com.jiahelogistic.R;
+import com.jiahelogistic.volleymanager.volley.UploadFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +57,7 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 	private static final String[] DUMMY_CREDENTIALS = new String[]{
 			"foo@example.com:hello", "bar@example.com:world"
 	};
+	private static final String TAG = "LOGIN_ACTIVITY";
 	/**
 	 * Keep track of the login task to ensure we can cancel it if requested.
 	 */
@@ -69,8 +76,6 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 		// Set up the login form.
 		mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 		populateAutoComplete();
-
-
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -95,6 +100,25 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 		mLoginFormView = findViewById(R.id.login_form);
 		mProgressView = findViewById(R.id.login_progress);
 
+		uploadFile();
+	}
+
+	private void uploadFile() {
+		File file = new File(Environment.getExternalStorageDirectory().getPath() + "/dump.txt");
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		Log.e(TAG, file.getAbsolutePath());
+		UploadFile uf = new UploadFile(file.getAbsolutePath());
+		try {
+			uf.run();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

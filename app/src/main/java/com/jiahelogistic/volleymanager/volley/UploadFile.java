@@ -1,5 +1,7 @@
 package com.jiahelogistic.volleymanager.volley;
 
+import com.jiahelogistic.config.NetConfig;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -32,7 +34,7 @@ public class UploadFile {
 		File file = new File(mFilename);
 
 		Request request = new Request.Builder()
-				.url("https://api.github.com/markdown/raw")
+				.url(NetConfig.CRASH_FILE_UPLOAD_URL)
 				.post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
 				.build();
 
