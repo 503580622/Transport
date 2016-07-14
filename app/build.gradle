@@ -29,4 +29,5 @@ dependencies {
 	compile 'com.navercorp.volleyextensions:volley-views:2.0.1'
 	compile 'com.android.support:support-v4:24.0.0'
 	compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+	compile 'junit:junit:4.12'
 }

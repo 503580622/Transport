@@ -112,7 +112,7 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 					Log.e(TAG, "create file failure");
 				}
 			} else {
-				File uploadFile = new File(file.getAbsolutePath() + "/dump.txt");
+				File uploadFile = new File(file.getAbsolutePath() + "/dump.md");
 				if (!uploadFile.exists()) {
 					boolean result = uploadFile.createNewFile();
 					if (result) {
@@ -137,7 +137,7 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 	 * @param file 需要上传的文件
 	 */
 	private void beginUpload(File file) throws Exception {
-		UploadFile uf = new UploadFile(file.getAbsolutePath());
+		UploadFile uf = new UploadFile(file);
 		uf.run();
 	}
 

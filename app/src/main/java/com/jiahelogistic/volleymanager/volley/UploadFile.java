@@ -1,5 +1,6 @@
 package com.jiahelogistic.volleymanager.volley;
 
+import android.os.Environment;
 import android.util.Log;
 
 import com.jiahelogistic.config.NetConfig;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -20,6 +22,7 @@ import okhttp3.Response;
 public class UploadFile {
 	public static final MediaType MEDIA_TYPE_MARKDOWN
 			= MediaType.parse("text/x-markdown; charset=utf-8");
+
 	private static final String TAG = "UploadFile";
 
 	private final OkHttpClient client = new OkHttpClient();
@@ -27,10 +30,10 @@ public class UploadFile {
 	/**
 	 * 上传文件名
 	 */
-	private String mFilename;
+	private File mFile;
 
-	public UploadFile(String filename) {
-		mFilename = filename;
+	public UploadFile(File file) {
+		mFile = file;
 	}
 
 	public void run() {
@@ -38,14 +41,15 @@ public class UploadFile {
 			@Override
 			public void run() {
 				super.run();
-				File file = new File(mFilename);
-
-				Request request = new Request.Builder()
-						.url(NetConfig.CRASH_FILE_UPLOAD_URL)
-						.post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))
-						.build();
-
 				try {
+					MultipartBody.Builder builder =  new MultipartBody.Builder();
+					builder.setType(MultipartBody.FORM);
+					builder.addFormDataPart("fileData", mFile.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, mFile));
+					MultipartBody body = builder.build();
+					Request request = new Request.Builder()
+							.url(NetConfig.CRASH_FILE_UPLOAD_URL)
+							.post(body)
+							.build();
 					Response response = client.newCall(request).execute();
 					if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
