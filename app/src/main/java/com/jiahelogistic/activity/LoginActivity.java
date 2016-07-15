@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -27,11 +26,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jiahelogistic.BasicActivity;
 import com.jiahelogistic.R;
-import com.jiahelogistic.volleymanager.volley.UploadFile;
+import com.jiahelogistic.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -137,8 +135,7 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 	 * @param file 需要上传的文件
 	 */
 	private void beginUpload(File file) throws Exception {
-		UploadFile uf = new UploadFile(file);
-		uf.run();
+		Utils.UploadFile(this, file);
 	}
 
 	@Override

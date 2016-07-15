@@ -88,6 +88,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				Log.e(TAG, e.toString());
+				Log.e(TAG, e.getStackTrace().toString());
 			}
 			Log.e(TAG, "Ready To Exit Progress");
 			Utils.Exit();
