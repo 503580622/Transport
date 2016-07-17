@@ -16,7 +16,6 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,10 +28,7 @@ import android.widget.TextView;
 
 import com.jiahelogistic.BasicActivity;
 import com.jiahelogistic.R;
-import com.jiahelogistic.utils.Utils;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -98,44 +94,7 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 		mLoginFormView = findViewById(R.id.login_form);
 		mProgressView = findViewById(R.id.login_progress);
 
-		uploadFile();
-	}
 
-	private void uploadFile() {
-		try {
-			File file = getFilesDir();
-			if (!file.exists()) {
-				boolean result = file.createNewFile();
-				if (!result) {
-					Log.e(TAG, "create file failure");
-				}
-			} else {
-				File uploadFile = new File(file.getAbsolutePath() + "/dump.md");
-				if (!uploadFile.exists()) {
-					boolean result = uploadFile.createNewFile();
-					if (result) {
-						beginUpload(uploadFile);
-					}
-				} else {
-					// 开始上传
-					if (uploadFile.isFile()) {
-						beginUpload(uploadFile);
-					}
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 开始上传
-	 * @param file 需要上传的文件
-	 */
-	private void beginUpload(File file) throws Exception {
-		Utils.UploadFile(this, file);
 	}
 
 	@Override

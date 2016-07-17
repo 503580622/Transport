@@ -4,21 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
 import com.jiahelogistic.BasicActivity;
 import com.jiahelogistic.R;
 import com.jiahelogistic.config.SystemConfig;
+import com.jiahelogistic.utils.Utils;
 
 /**
- * splash界面，默认展示信息，3秒钟后跳转主界面
+ * splash界面
  */
 public class SplashActivity extends BasicActivity {
 
 	/**
 	 * 标志
 	 */
-	private final String TAG = "Splash_ACTIVITY";
+	private static final String TAG = "Splash_ACTIVITY";
 
 	/**
 	 * 设置自动跳转主界面的时间（默认3秒）
@@ -33,7 +33,7 @@ public class SplashActivity extends BasicActivity {
 			switch (msg.what) {
 				case SystemConfig.MAIN_ACTIVITY:
 					// 进入主activity
-					Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+					Intent intent = new Intent(SplashActivity.this, MainActivity.class);
 					startActivity(intent);
 					break;
 			}
@@ -44,15 +44,19 @@ public class SplashActivity extends BasicActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_splash);
 
+		// 开启新线程
 		new Thread() {
 			@Override
 			public void run() {
-				super.run();
 				Message msg = Message.obtain();
 				msg.what = SystemConfig.MAIN_ACTIVITY;
 				mHandler.sendMessageDelayed(msg, AUTO_START_MAIN_ACTIVITY);
+
+				// TODO 其他网络需要
+				// 检查更新
+				Utils.checkUpdate();
 			}
-		}.run();
+		}.start();
 	}
 
 	@Override

@@ -5,6 +5,22 @@ package com.jiahelogistic.config;
  * 网络配置，单例模式
  */
 public class NetConfig {
+
+	/**
+	 * 没有网络连接
+	 */
+	public static final int NO_INTERNET_CONNECTION = 0;
+
+	/**
+	 * 没有找到该地址
+	 */
+	public static final int HTTP_NOT_FOUND = 404;
+
+	/**
+	 * 成功访问地址
+	 */
+	public static final int HTTP_OK = 200;
+
 	/**
 	 * 连接根地址
 	 */

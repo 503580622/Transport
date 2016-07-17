@@ -13,5 +13,10 @@
 	<string name="jh_permission_rationale">"Contacts permissions are needed for providing email
 		completions."
 	</string>
+	<string name="wl_no_internet_connect">Check your internet</string>
+	<string name="wl_url_not_found">Not found</string>
+	<string name="title_activity_main">MainActivity</string>
+	<string name="action_settings">Settings</string>
+	<string name="section_format">Hello World from section: %1$d</string>
 
 </resources>

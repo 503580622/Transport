@@ -1,9 +1,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:tools="http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:background="#0099cc"
-		tools:context="com.jiahelogistic.activity.SplashActivity">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#0099cc"
+             tools:context="com.jiahelogistic.activity.SplashActivity">
 
 	<FrameLayout
 		android:layout_width="match_parent"
@@ -21,6 +21,10 @@
 			tools:ignore="UselessParent">
 
 		</LinearLayout>
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:id="@+id/wl_splash_image" android:layout_gravity="center"/>
 	</FrameLayout>
 
 </FrameLayout>

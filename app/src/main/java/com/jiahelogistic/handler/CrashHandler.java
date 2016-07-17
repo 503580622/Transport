@@ -1,4 +1,4 @@
-package com.jiahelogistic.crash;
+package com.jiahelogistic.handler;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

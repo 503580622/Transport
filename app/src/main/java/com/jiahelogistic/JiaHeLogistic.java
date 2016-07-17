@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
-import com.jiahelogistic.config.NetConfig;
-import com.jiahelogistic.crash.CrashHandler;
+import com.jiahelogistic.handler.CrashHandler;
 
 import java.util.Stack;
 
