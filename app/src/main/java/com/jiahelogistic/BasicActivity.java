@@ -15,12 +15,19 @@ public abstract class BasicActivity extends AppCompatActivity {
 
 	private String TAG = "BASIC_ACTIVITY";
 
+	/**
+	 * 全局应用
+	 */
+	protected JiaHeLogistic app;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// 获取application
-		JiaHeLogistic app = JiaHeLogistic.getInstance();
+		// 获取APP
+		app = JiaHeLogistic.getInstance();
+
+		// 获取stack
 		stack = app.getStack();
 
 		LoadToStack();

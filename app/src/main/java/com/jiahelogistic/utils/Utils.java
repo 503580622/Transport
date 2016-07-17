@@ -126,4 +126,11 @@ public class Utils {
 	public static final void showToast(Context c, String msg, int duration) {
 		Toast.makeText(c, msg, duration).show();
 	}
+
+	/**
+	 * 检查网络
+	 */
+	public static final void checkNetword() {
+
+	}
 }

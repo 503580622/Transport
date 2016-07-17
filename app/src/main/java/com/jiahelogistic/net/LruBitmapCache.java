@@ -1,4 +1,4 @@
-package com.jiahelogistic.volleymanager.volley;
+package com.jiahelogistic.net;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -30,6 +30,11 @@ public class JiaHeLogistic extends Application {
 	 */
 	private static JiaHeLogistic instance;
 
+	/**
+	 * 是否有网络
+	 */
+	private boolean hasNetword = true;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -59,5 +64,13 @@ public class JiaHeLogistic extends Application {
 	 */
 	public static JiaHeLogistic getInstance() {
 		return instance;
+	}
+
+	public boolean isHasNetword() {
+		return hasNetword;
+	}
+
+	public void setHasNetword(boolean hasNetword) {
+		this.hasNetword = hasNetword;
 	}
 }

@@ -6,8 +6,10 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.jiahelogistic.BasicActivity;
+import com.jiahelogistic.JiaHeLogistic;
 import com.jiahelogistic.R;
 import com.jiahelogistic.config.SystemConfig;
+import com.jiahelogistic.net.NetUtils;
 import com.jiahelogistic.utils.Utils;
 
 /**
@@ -53,6 +55,8 @@ public class SplashActivity extends BasicActivity {
 				mHandler.sendMessageDelayed(msg, AUTO_START_MAIN_ACTIVITY);
 
 				// TODO 其他网络需要
+				// 检查是否有网络
+				app.setHasNetword(NetUtils.checkNet(SplashActivity.this));
 				// 检查更新
 				Utils.checkUpdate();
 			}
