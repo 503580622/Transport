@@ -88,6 +88,22 @@ public class MainActivity extends BasicActivity {
 	}
 
 	/**
+	 * 友盟+统计
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+	}
+
+	/**
+	 * 友盟+统计
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+	}
+
+	/**
 	 * 子类实现，用于activity栈管理
 	 */
 	@Override

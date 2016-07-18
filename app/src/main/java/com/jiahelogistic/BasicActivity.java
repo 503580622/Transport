@@ -37,4 +37,22 @@ public abstract class BasicActivity extends AppCompatActivity {
 	 * 子类实现，用于activity栈管理
 	 */
 	protected abstract void LoadToStack();
+
+	/**
+	 * 友盟+Session统计
+	 */
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(stack.firstElement());
+	}
+
+	/**
+	 * 友盟+Session统计
+	 */
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(stack.firstElement());
+	}
 }
