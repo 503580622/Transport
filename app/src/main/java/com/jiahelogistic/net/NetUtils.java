@@ -3,12 +3,14 @@ package com.jiahelogistic.net;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Message;
 import android.util.Log;
 
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.jiahelogistic.bean.UpgradeBean;
 import com.jiahelogistic.config.NetConfig;
+import com.jiahelogistic.config.SystemConfig;
+import com.jiahelogistic.handler.BasicNetworkHandler;
 
 /**
  * Created by Li Huanling on 2016/7/17 0017.
@@ -75,20 +77,18 @@ public class NetUtils {
 	/**
 	 * 检查是否有更新
 	 */
-	public static final void checkUpdate() {
+	public static final void checkUpdate(final BasicNetworkHandler handler) {
 		VolleyManager volleyManager = VolleyManager.newInstance();
 		volleyManager.GsonPostRequest("upgrade", null, NetConfig.URL_UPLOAD_APP, UpgradeBean.class,
 				new Response.Listener<UpgradeBean>() {
 					@Override
 					public void onResponse(UpgradeBean response) {
-						// TODO 成功处理
+						Message msg = Message.obtain();
+						msg.what = SystemConfig.SYSTEM_CHECK_UPGRADE;
+						msg.obj = response;
+						handler.sendMessage(msg);
 					}
 				},
-				new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						// TODO 失败处理
-					}
-				});
+				new BasicResponseError(handler));
 	}
 }

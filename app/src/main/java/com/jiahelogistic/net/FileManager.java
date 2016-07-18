@@ -1,19 +1,17 @@
 package com.jiahelogistic.net;
 
 import android.app.Activity;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 
 import com.jiahelogistic.JiaHeLogistic;
-import com.jiahelogistic.config.NetConfig;
 import com.jiahelogistic.bean.KeyValue;
+import com.jiahelogistic.config.NetConfig;
+import com.jiahelogistic.handler.BasicNetworkHandler;
 
 import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -23,8 +21,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
- * Created by Li Huanling on 2016/7/12 0012.
- * 文件上传下载工具类
+ * @author Li Huanling.
+ * 2016/7/12 13:16
+ * 文件上传下载工具类，使用Okhttp3.2
  */
 public class FileManager {
 	/**
@@ -55,7 +54,7 @@ public class FileManager {
 	 * @param param 额外参数，键值对数组
 	 * @param handler 处理返回结果
 	 */
-	public static final void asynPost(File file, KeyValue[] param, final Handler handler) {
+	public static final void asynPost(File file, KeyValue[] param, final BasicNetworkHandler handler) {
 		MultipartBody.Builder builder =  new MultipartBody.Builder();
 		builder.setType(MultipartBody.FORM);
 		builder.addFormDataPart("fileData", file.getName(), RequestBody.create(MEDIA_TYPE_MARKDOWN, file));
@@ -74,20 +73,7 @@ public class FileManager {
 				.post(body)
 				.build();
 
-		client.newCall(request).enqueue(new Callback() {
-			/**
-			 * 返回的消息
-			 */
-			private Message msg = Message.obtain();
-
-			@Override
-			public void onFailure(Call call, IOException e) {
-				// 没有网络
-				Log.e("FileManager", "没有网络");
-				msg.what = NetConfig.STATUS_NO_INTERNET_CONNECTION;
-				handler.sendMessage(msg);
-			}
-
+		client.newCall(request).enqueue(new BasicResponseError(handler) {
 			@Override
 			public void onResponse(Call call, Response response) throws IOException {
 				if (!response.isSuccessful()) {

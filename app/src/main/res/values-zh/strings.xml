@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="jh_app_name">佳合代运</string>
+
+	<!-- 状态 -->
+	<string name="jh_state_http_timeout">连接超时，请稍后再试！</string>
+	<string name="jh_state_no_internet">请检查你的网络是否开启！</string>
+	<string name="jh_state_http_not_found">请检查地址！</string>
+
 	<string name="jh_action_sign_in">登陆</string>
 	<string name="jh_error_field_required">此内容必须填写！</string>
 	<string name="jh_error_incorrect_password">密码不正确！</string>
@@ -10,6 +16,8 @@
 	<string name="jh_prompt_email">邮箱地址</string>
 	<string name="jh_prompt_password">密码</string>
 	<string name="jh_action_register">注册</string>
-	<string name="wl_no_internet_connect">请检查你的网络是否开启！</string>
-	<string name="wl_url_not_found">请检查地址！</string>
+	<string name="jh_action_settings">设置</string>
+	<string name="jh_title_activity_main">佳合代运</string>
+	<string name="jh_title_activity_settings">设置</string>
+
 </resources>

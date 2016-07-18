@@ -1,11 +1,10 @@
 package com.jiahelogistic;
 
 import android.Manifest;
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.test.ApplicationTestCase;
+import android.test.InstrumentationTestCase;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -15,16 +14,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
+ * Created by Li Huanling on 2016/7/18 0018.
+ * 单元测试
  */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-	public ApplicationTest() {
-		super(Application.class);
-	}
-
-	public void testDeviceInfo() {
-		String deviceId = getDeviceInfo(getContext());
-		Log.e("testDeviceInfo", deviceId == null ? "none" : deviceId);
+public class TestClass extends InstrumentationTestCase {
+	public void test() {
+		Log.e("TestClass",getDeviceInfo(getInstrumentation().getContext()));
 	}
 
 	public static boolean checkPermission(Context context, String permission) {

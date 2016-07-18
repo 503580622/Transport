@@ -26,7 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.jiahelogistic.BasicActivity;
 import com.jiahelogistic.R;
 
 import java.util.ArrayList;
@@ -37,7 +36,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends BasicActivity implements LoaderCallbacks<Cursor> {
+public class LoginAppCompatActivity extends BasicAppCompatActivity implements LoaderCallbacks<Cursor> {
 
 	/**
 	 * Id to identity READ_CONTACTS permission request.
@@ -107,7 +106,7 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 	 * 用于activity栈管理
 	 */
 	@Override
-	protected void LoadToStack() {
+	protected void loadToStack() {
 		stack.push(this);
 	}
 
@@ -301,7 +300,7 @@ public class LoginActivity extends BasicActivity implements LoaderCallbacks<Curs
 	private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
 		//Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
 		ArrayAdapter<String> adapter =
-				new ArrayAdapter<>(LoginActivity.this,
+				new ArrayAdapter<>(LoginAppCompatActivity.this,
 						android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
 		mEmailView.setAdapter(adapter);

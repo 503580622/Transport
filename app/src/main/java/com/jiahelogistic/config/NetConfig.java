@@ -21,6 +21,8 @@ public class NetConfig {
 	 */
 	public static final int STATUS_HTTP_OK = 200;
 
+	public static final int STATUS_HTTP_TIMEOUT = 408;
+
 
 	/*******************************************
 	地址常量

@@ -33,7 +33,12 @@ public class JiaHeLogistic extends Application {
 	/**
 	 * 是否有网络
 	 */
-	private boolean hasNetword = true;
+	private boolean hasNetwork = true;
+
+	/**
+	 * 是否已经提示用户网络状态，启动检查提示一次就可以，以后网络状态有变化需再次提示
+	 */
+	private boolean hasPromptNetwork = false;
 
 	@Override
 	public void onCreate() {
@@ -66,11 +71,35 @@ public class JiaHeLogistic extends Application {
 		return instance;
 	}
 
-	public boolean isHasNetword() {
-		return hasNetword;
+	/**
+	 * 获取网络状态
+	 * @return 网络状态
+	 */
+	public boolean isHasNetwork() {
+		return hasNetwork;
 	}
 
-	public void setHasNetword(boolean hasNetword) {
-		this.hasNetword = hasNetword;
+	/**
+	 * 设置网络状态
+	 * @param hasNetwork 网络状态
+	 */
+	public void setHasNetwork(boolean hasNetwork) {
+		this.hasNetwork = hasNetwork;
+	}
+
+	/**
+	 * 是否已经提示用户网络状态
+	 * @return 是否提示
+	 */
+	public boolean isHasPromptNetwork() {
+		return hasPromptNetwork;
+	}
+
+	/**
+	 * 设置是否提示用户网络状态
+	 * @param hasPromptNetwork 是否提示
+	 */
+	public void setHasPromptNetwork(boolean hasPromptNetwork) {
+		this.hasPromptNetwork = hasPromptNetwork;
 	}
 }

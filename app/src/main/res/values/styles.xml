@@ -10,7 +10,9 @@
 
 	<style name="NoTitle" parent="AppTheme">
 		<item name="windowActionBar">false</item>
+		<!-- 使用API Level 22 编译需要去掉前缀 -->
 		<item name="windowNoTitle">true</item>
+		<item name="android:windowNoTitle">true</item>
 	</style>
 
 	<style name="FullscreenTheme" parent="AppTheme">
