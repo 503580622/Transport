@@ -1,4 +1,4 @@
-package com.jiahelogistic.entity;
+package com.jiahelogistic.bean;
 
 /**
  * Created by Li Huanling on 2016/7/16 0016.

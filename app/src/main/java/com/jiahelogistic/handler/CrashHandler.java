@@ -10,7 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.jiahelogistic.utils.Utils;
+import com.jiahelogistic.net.FileManager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -91,7 +91,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 				Log.e(TAG, e.getStackTrace().toString());
 			}
 			Log.e(TAG, "Ready To Exit Progress");
-			Utils.Exit();
+			FileManager.Exit();
 		}
 	}
 

@@ -20,13 +20,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jiahelogistic.BasicActivity;
 import com.jiahelogistic.R;
-import com.jiahelogistic.entity.KeyValue;
+import com.jiahelogistic.bean.KeyValue;
 import com.jiahelogistic.handler.BasicHandler;
-import com.jiahelogistic.utils.Utils;
+import com.jiahelogistic.net.FileManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -86,7 +85,6 @@ public class MainActivity extends BasicActivity {
 		});
 
 		uploadFile();
-		Toast.makeText(this, "haha", Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -131,7 +129,7 @@ public class MainActivity extends BasicActivity {
 	 * @param file 需要上传的文件
 	 */
 	private void beginUpload(File file) throws Exception {
-		Utils.asynPost(file, new KeyValue[] {new KeyValue("haha", "123"), new KeyValue("Test", "myTest")}, mHandler);
+		FileManager.asynPost(file, new KeyValue[] {new KeyValue("haha", "123"), new KeyValue("Test", "myTest")}, mHandler);
 	}
 
 

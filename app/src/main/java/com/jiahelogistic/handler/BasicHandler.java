@@ -32,9 +32,9 @@ public class BasicHandler extends Handler {
 	@Override
 	public void handleMessage(Message msg) {
 		Log.e("BasicHandler", app.getStack().pop().toString());
-		if (msg.what == NetConfig.NO_INTERNET_CONNECTION) {
+		if (msg.what == NetConfig.STATUS_NO_INTERNET_CONNECTION) {
 			Utils.showToast(app.getStack().firstElement(), app.getStack().firstElement().getString(R.string.wl_no_internet_connect), Toast.LENGTH_SHORT);
-		} else if (msg.what == NetConfig.HTTP_NOT_FOUND) {
+		} else if (msg.what == NetConfig.STATUS_HTTP_NOT_FOUND) {
 			Utils.showToast(app.getStack().firstElement(), app.getStack().firstElement().getString(R.string.wl_url_not_found), Toast.LENGTH_SHORT);
 		}
 	}

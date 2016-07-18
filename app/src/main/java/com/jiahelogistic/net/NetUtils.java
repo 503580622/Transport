@@ -1,27 +1,34 @@
 package com.jiahelogistic.net;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.util.Log;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.jiahelogistic.bean.UpgradeBean;
+import com.jiahelogistic.config.NetConfig;
 
 /**
  * Created by Li Huanling on 2016/7/17 0017.
+ * 检查网络状态
  */
 public class NetUtils {
+	private static final String TAG = "NetUtils";
+
 	/**
 	 * 检查用户的网络:是否有网络
+	 * @param context 上下文
+	 * @return 是否有网络
 	 */
 	public static boolean checkNet(Context context) {
 		// 判断：WIFI链接
 		boolean isWIFI = isWIFIConnection(context);
-		Log.e("NETUTILS", Boolean.toString(isWIFI));
+		Log.e(TAG, "Wifi:" + Boolean.toString(isWIFI));
 		// 判断：Mobile链接
 		boolean isMOBILE = isMOBILEConnection(context);
-		Log.e("NETUTILS", Boolean.toString(isMOBILE));
+		Log.e(TAG, "Mobile:" + Boolean.toString(isMOBILE));
 		if (!isWIFI && !isMOBILE) {
 			return false;
 		}
@@ -32,8 +39,8 @@ public class NetUtils {
 	/**
 	 * 判断：Mobile链接
 	 *
-	 * @param context
-	 * @return
+	 * @param context 上下文
+	 * @return 是否是手机网络
 	 */
 	private static boolean isMOBILEConnection(Context context) {
 		ConnectivityManager manager = (ConnectivityManager) context
@@ -50,8 +57,8 @@ public class NetUtils {
 	/**
 	 * 判断：WIFI链接
 	 *
-	 * @param context
-	 * @return
+	 * @param context 上下文
+	 * @return 是否是Wifi
 	 */
 	private static boolean isWIFIConnection(Context context) {
 		ConnectivityManager manager = (ConnectivityManager) context
@@ -63,5 +70,25 @@ public class NetUtils {
 			return networkInfo.isConnected();
 		}
 		return false;
+	}
+
+	/**
+	 * 检查是否有更新
+	 */
+	public static final void checkUpdate() {
+		VolleyManager volleyManager = VolleyManager.newInstance();
+		volleyManager.GsonPostRequest("upgrade", null, NetConfig.URL_UPLOAD_APP, UpgradeBean.class,
+				new Response.Listener<UpgradeBean>() {
+					@Override
+					public void onResponse(UpgradeBean response) {
+						// TODO 成功处理
+					}
+				},
+				new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						// TODO 失败处理
+					}
+				});
 	}
 }

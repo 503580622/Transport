@@ -10,6 +10,6 @@
 	<string name="jh_prompt_email">邮箱地址</string>
 	<string name="jh_prompt_password">密码</string>
 	<string name="jh_action_register">注册</string>
-	<string name="wl_no_internet_connect">请检查你的网络连接！</string>
+	<string name="wl_no_internet_connect">请检查你的网络是否开启！</string>
 	<string name="wl_url_not_found">请检查地址！</string>
 </resources>
