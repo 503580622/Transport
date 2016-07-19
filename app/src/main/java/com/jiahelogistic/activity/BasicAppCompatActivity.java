@@ -10,27 +10,22 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.Stack;
 
 public abstract class BasicAppCompatActivity extends AppCompatActivity {
-	/**
-	 * activity栈管理
-	 */
-	protected Stack<Activity> stack;
 
 	private String TAG = "BasicAppCompatActivity";
 
 	/**
 	 * 全局应用
 	 */
-	protected JiaHeLogistic app;
+	protected JiaHeLogistic app = JiaHeLogistic.getInstance();
+
+	/**
+	 * activity栈管理
+	 */
+	protected Stack<Activity> stack = app.getStack();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// 获取APP
-		app = JiaHeLogistic.getInstance();
-
-		// 获取stack
-		stack = app.getStack();
 
 		loadToStack();
 	}

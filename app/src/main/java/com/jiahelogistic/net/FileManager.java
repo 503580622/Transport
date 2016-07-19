@@ -77,6 +77,7 @@ public class FileManager {
 			@Override
 			public void onResponse(Call call, Response response) throws IOException {
 				if (!response.isSuccessful()) {
+					// 响应失败
 					Log.e("asynPost", "NOT FOUND");
 					msg.what = NetConfig.STATUS_HTTP_NOT_FOUND;
 					handler.sendMessage(msg);
@@ -84,7 +85,7 @@ public class FileManager {
 				}
 				Headers responseHeaders = response.headers();
 				for (int i = 0; i < responseHeaders.size(); i++) {
-					Log.e("UploadFileHeader", responseHeaders.name(i) + ": " + responseHeaders.value(i));
+					//Log.e("UploadFileHeader", responseHeaders.name(i) + ": " + responseHeaders.value(i));
 				}
 
 				Log.e("UploadFile", response.body().string());

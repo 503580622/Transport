@@ -30,7 +30,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 
 	private static final String TAG = "MainAppCompatActivity";
 
-	private BasicNetworkHandler mHandler = new BasicNetworkHandler() {
+	private BasicNetworkHandler mHandler = new BasicNetworkHandler(app) {
 		@Override
 		public void handleMessage(Message msg) {
 			// 优先交给父类处理
@@ -80,6 +80,13 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 						.setAction("Action", null).show();
 			}
 		});
+
+		// 处理升级信息
+		Bundle bundle = getIntent().getExtras();
+		boolean isNeedUpgrade = bundle.getBoolean("isNeedUpgrade");
+		if (isNeedUpgrade) {
+			Log.e(TAG, bundle.getParcelable("upgrade").toString());
+		}
 
 		uploadFile();
 	}

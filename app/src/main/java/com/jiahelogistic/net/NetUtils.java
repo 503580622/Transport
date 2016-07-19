@@ -12,6 +12,8 @@ import com.jiahelogistic.config.NetConfig;
 import com.jiahelogistic.config.SystemConfig;
 import com.jiahelogistic.handler.BasicNetworkHandler;
 
+import java.util.HashMap;
+
 /**
  * Created by Li Huanling on 2016/7/17 0017.
  * 检查网络状态
@@ -79,10 +81,11 @@ public class NetUtils {
 	 */
 	public static final void checkUpdate(final BasicNetworkHandler handler) {
 		VolleyManager volleyManager = VolleyManager.newInstance();
-		volleyManager.GsonPostRequest("upgrade", null, NetConfig.URL_UPLOAD_APP, UpgradeBean.class,
+		volleyManager.GsonGetRequest("upgrade", NetConfig.URL_UPLOAD_APP, UpgradeBean.class,
 				new Response.Listener<UpgradeBean>() {
 					@Override
 					public void onResponse(UpgradeBean response) {
+						Log.e(TAG, response.toString());
 						Message msg = Message.obtain();
 						msg.what = SystemConfig.SYSTEM_CHECK_UPGRADE;
 						msg.obj = response;

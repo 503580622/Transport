@@ -22,33 +22,37 @@ import com.jiahelogistic.utils.Utils;
  */
 public class BasicNetworkHandler extends Handler {
 
-	private JiaHeLogistic app = JiaHeLogistic.getInstance();
+	/**
+	 * 全局应用
+	 */
+	protected JiaHeLogistic app;
 
-	public BasicNetworkHandler() {
+	public BasicNetworkHandler(JiaHeLogistic app) {
+		this.app = app;
 	}
 
 	@Override
 	public void handleMessage(Message msg) {
-		Log.e("BasicNetworkHandler", app.getStack().firstElement().toString());
-
 		// 设置已经提示用户网络状态
 		app.setHasPromptNetwork(true);
 
-		if (msg.what == NetConfig.STATUS_NO_INTERNET_CONNECTION) {
-			// 没有连接网络
-			Utils.showToast(app.getStack().firstElement(), app.getString(R.string.jh_state_no_internet), Toast.LENGTH_SHORT);
-		} else if (msg.what == NetConfig.STATUS_HTTP_TIMEOUT) {
-			// 连接超时
-			Utils.showToast(app.getStack().firstElement(), app.getString(R.string.jh_state_http_timeout), Toast.LENGTH_SHORT);
-		} else if (msg.what == NetConfig.STATUS_HTTP_NOT_FOUND) {
-			// 404
-			Utils.showToast(app.getStack().firstElement(), app.getString(R.string.jh_state_http_not_found), Toast.LENGTH_SHORT);
-		} else if (msg.what == SystemConfig.SYSTEM_CHECK_UPGRADE) {
-			UpgradeBean bean = (UpgradeBean)msg.obj;
-			String versionName = Utils.getAppVersionName(app);
-			if (!TextUtils.equals(versionName, bean.getVersionName())) {
-				// TODO 有更新可用，判断是否在主页面，是就弹出升级提醒，否则就等待进入主页面再提醒
-			}
+		switch (msg.what) {
+			case NetConfig.STATUS_NO_INTERNET_CONNECTION:
+				// 没有连接网络
+				Utils.showToast(app.getStack().firstElement(), app.getString(R.string.jh_state_no_internet), Toast.LENGTH_SHORT);
+				break;
+
+			case NetConfig.STATUS_HTTP_TIMEOUT:
+				// 连接超时
+				Utils.showToast(app.getStack().firstElement(), app.getString(R.string.jh_state_http_timeout), Toast.LENGTH_SHORT);
+				break;
+
+			case NetConfig.STATUS_HTTP_NOT_FOUND:
+				// 404
+				Utils.showToast(app.getStack().firstElement(), app.getString(R.string.jh_state_http_not_found), Toast.LENGTH_SHORT);
+				break;
+
+			default:
 		}
 	}
 }

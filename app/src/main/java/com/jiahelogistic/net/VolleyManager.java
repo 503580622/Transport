@@ -170,12 +170,12 @@ public class VolleyManager {
 	 * @param listener 访问成功监听器
 	 * @param errorListener 访问失败监听器
 	 * @param <T> 泛型
-	 * @return
+	 * @return 请求
 	 */
 	public <T> GsonRequest<T> GsonPostRequest(Object tag, Map<String, String> params, String url,
 	                                          Class<T> clazz, Response.Listener<T> listener,
 	                                          Response.ErrorListener errorListener) {
-		GsonRequest<T> request = new GsonRequest<T>(Request.Method.POST, params, url, clazz, listener, errorListener);
+		GsonRequest<T> request = new GsonRequest<>(Request.Method.POST, params, url, clazz, listener, errorListener);
 		request.setTag(tag);
 		add(request);
 		return request;

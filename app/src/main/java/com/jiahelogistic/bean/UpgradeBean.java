@@ -1,10 +1,14 @@
 package com.jiahelogistic.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
- * Created by Administrator on 2016/7/18 0018.
+ * @author Li Huanling.
+ * 2016/7/18 12:56
  * 应用升级信息
  */
-public class UpgradeBean {
+public class UpgradeBean implements Parcelable {
 
 	/**
 	 * 版本号
@@ -103,6 +107,11 @@ public class UpgradeBean {
 		return isForce;
 	}
 
+	@Override
+	public String toString() {
+		return versionName + String.valueOf(versionCode) + description + String.valueOf(isForce);
+	}
+
 	/**
 	 * 设置是否强制升级
 	 * @param isForce 是否强制升级
@@ -110,4 +119,41 @@ public class UpgradeBean {
 	public void setIsForce(boolean isForce) {
 		this.isForce = isForce;
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(this.versionCode);
+		dest.writeString(this.versionName);
+		dest.writeString(this.url);
+		dest.writeString(this.description);
+		dest.writeByte(this.isForce ? (byte) 1 : (byte) 0);
+	}
+
+	public UpgradeBean() {
+	}
+
+	protected UpgradeBean(Parcel in) {
+		this.versionCode = in.readInt();
+		this.versionName = in.readString();
+		this.url = in.readString();
+		this.description = in.readString();
+		this.isForce = in.readByte() != 0;
+	}
+
+	public static final Parcelable.Creator<UpgradeBean> CREATOR = new Parcelable.Creator<UpgradeBean>() {
+		@Override
+		public UpgradeBean createFromParcel(Parcel source) {
+			return new UpgradeBean(source);
+		}
+
+		@Override
+		public UpgradeBean[] newArray(int size) {
+			return new UpgradeBean[size];
+		}
+	};
 }

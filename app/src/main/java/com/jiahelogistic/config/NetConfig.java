@@ -42,6 +42,6 @@ public class NetConfig {
 	/**
 	 * 检查更新
 	 */
-	public static final String URL_UPLOAD_APP = URL_HOST_ROOT + "/checkUpload.php";
+	public static final String URL_UPLOAD_APP = URL_HOST_ROOT + "/checkUpgrade.php";
 
 }

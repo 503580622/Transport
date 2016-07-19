@@ -53,7 +53,7 @@ public class BasicResponseError implements Response.ErrorListener, Callback {
 	 * Callback method that an error has been occurred with the
 	 * provided error code and optional user-readable message.
 	 *
-	 * @param error
+	 * @param error 错误信息
 	 */
 	@Override
 	public void onErrorResponse(VolleyError error) {
@@ -83,14 +83,17 @@ public class BasicResponseError implements Response.ErrorListener, Callback {
 	 * 网络访问失败处理
 	 */
 	private void callFailure() {
-		if (app.isHasNetwork()) {
-			// 有网络，连接超时
-			msg.what = NetConfig.STATUS_HTTP_TIMEOUT;
-		} else {
-			// 没有网络连接
-			msg.what = NetConfig.STATUS_NO_INTERNET_CONNECTION;
+		if (!app.isHasPromptNetwork()) {
+			// 如果已经提示过用户，则忽略
+			if (app.isHasNetwork()) {
+				// 有网络，连接超时
+				msg.what = NetConfig.STATUS_HTTP_TIMEOUT;
+			} else {
+				// 没有网络连接
+				msg.what = NetConfig.STATUS_NO_INTERNET_CONNECTION;
+			}
+			mHandler.sendMessage(msg);
 		}
-		mHandler.sendMessage(msg);
 	}
 
 	/**
