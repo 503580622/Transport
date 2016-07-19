@@ -26,7 +26,9 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * created by Li Huanling on 2016/7/11 0011
+ * Created by Li Huanling
+ * On 2016/7/11 22:40.
+ *
  * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
  */
 public class CrashHandler implements UncaughtExceptionHandler {
@@ -116,6 +118,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 			}
 		}.start();
 		Log.e(TAG, ex.getMessage());
+		ex.printStackTrace();
 		// 收集设备参数信息
 		collectDeviceInfo(mContext);
 		// 保存日志文件
@@ -148,7 +151,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 			try {
 				field.setAccessible(true);
 				infos.put(field.getName(), field.get(null).toString());
-				Log.d(TAG, field.getName() + " : " + field.get(null));
+				//Log.d(TAG, field.getName() + " : " + field.get(null));
 			} catch (Exception e) {
 				Log.e(TAG, "an error occured when collect crash info", e);
 			}

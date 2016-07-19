@@ -22,10 +22,17 @@ import com.jiahelogistic.R;
 import com.jiahelogistic.bean.KeyValue;
 import com.jiahelogistic.handler.BasicNetworkHandler;
 import com.jiahelogistic.net.FileManager;
+import com.jiahelogistic.widget.DialogFactory;
 
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Created by Li Huanling
+ * On 2016/07/17 16:23
+ *
+ * 主界面
+ */
 public class MainAppCompatActivity extends BasicAppCompatActivity {
 
 	private static final String TAG = "MainAppCompatActivity";
@@ -86,9 +93,10 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		boolean isNeedUpgrade = bundle.getBoolean("isNeedUpgrade");
 		if (isNeedUpgrade) {
 			Log.e(TAG, bundle.getParcelable("upgrade").toString());
+			// 升级提示
+			DialogFactory.createCommonRequestDialog(this, "我的宝贝乖老婆").show();
 		}
-
-		uploadFile();
+		//uploadFile();
 	}
 
 	/**

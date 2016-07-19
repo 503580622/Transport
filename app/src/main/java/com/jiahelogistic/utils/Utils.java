@@ -7,7 +7,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
- * Created by Administrator on 2016/7/18 0018.
+ * Created by Li Huanling
+ * On 2016/7/18 01:12.
+ *
  * 普通工具类
  */
 public class Utils {

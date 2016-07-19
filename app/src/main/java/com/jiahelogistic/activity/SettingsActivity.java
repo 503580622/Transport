@@ -25,6 +25,9 @@ import com.jiahelogistic.R;
 import java.util.List;
 
 /**
+ * Created by Li Huanling
+ * On 2016/07/18 22:59
+ *
  * A {@link PreferenceActivity} that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
  * settings are split by category, with category headers shown to the left of

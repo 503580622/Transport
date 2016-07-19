@@ -34,7 +34,10 @@ import java.util.List;
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
- * A login screen that offers login via email/password.
+ * Created by Li Huanling
+ * On 2016/07/14 20:16
+ *
+ * 通过邮箱密码登录的登录界面
  */
 public class LoginAppCompatActivity extends BasicAppCompatActivity implements LoaderCallbacks<Cursor> {
 

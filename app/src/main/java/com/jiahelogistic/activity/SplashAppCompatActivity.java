@@ -14,8 +14,9 @@ import com.jiahelogistic.net.NetUtils;
 import com.jiahelogistic.utils.Utils;
 
 /**
- * @author Li Huanling
- * 2016/07/12 23:15
+ * Created by Li Huanling
+ * On 2016/07/12 23:15
+ *
  * splash界面
  */
 public class SplashAppCompatActivity extends BasicAppCompatActivity {
@@ -52,21 +53,21 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 					Intent intent = new Intent(SplashAppCompatActivity.this,
 							MainAppCompatActivity.class);
 
+					Bundle bundle = new Bundle();
+					bundle.putBoolean("isNeedUpgrade", isNeedUpgrade);
+
 					// 是否需要升级
 					if (isNeedUpgrade) {
-						Bundle bundle = new Bundle();
-						bundle.putBoolean("isNeedUpgrade", isNeedUpgrade);
 						bundle.putParcelable("upgrade", bean);
-						intent.putExtras(bundle);
 					}
-
+					intent.putExtras(bundle);
 					startActivity(intent);
 					// 不加入activity栈中，防止在主界面后退回到此界面
 					SplashAppCompatActivity.this.finish();
 					break;
 
 				case SystemConfig.SYSTEM_CHECK_UPGRADE:
-					UpgradeBean bean = (UpgradeBean)msg.obj;
+					UpgradeBean bean = (UpgradeBean) msg.obj;
 					String versionName = Utils.getAppVersionName(this.app);
 					if (!TextUtils.equals(versionName, bean.getVersionName())) {
 						// TODO 有更新可用，判断是否在主页面，是就弹出升级提醒，否则就等待进入主页面再提醒
@@ -84,6 +85,7 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 			}
 		}
 	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

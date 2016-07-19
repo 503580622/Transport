@@ -9,10 +9,10 @@ import com.jiahelogistic.handler.CrashHandler;
 import java.util.Stack;
 
 /**
- * Created by Li Huanling on 2016/7/11 0011.
- * 定义全局常量，处理全局异常
+ * Created by Li Huanling
+ * On 2016/7/11 20:59.
  *
- * @version 1.0
+ * 定义全局常量，处理全局异常
  */
 public class JiaHeLogistic extends Application {
 	/**

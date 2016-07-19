@@ -4,8 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * @author Li Huanling.
- * 2016/7/18 12:56
+ * Created by Li Huanling
+ * 2016/7/18 12:56.
+ *
  * 应用升级信息
  */
 public class UpgradeBean implements Parcelable {

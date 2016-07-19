@@ -15,8 +15,8 @@ import okhttp3.Call;
 import okhttp3.Callback;
 
 /**
- * @author Huanling.
- * 2016/07/19 0:38
+ * Created by Huanling.
+ * on 2016/07/19 0:38
  * Volley与Okhttp3通用失败处理，只处理失败情况
  */
 public class BasicResponseError implements Response.ErrorListener, Callback {
@@ -57,7 +57,7 @@ public class BasicResponseError implements Response.ErrorListener, Callback {
 	 */
 	@Override
 	public void onErrorResponse(VolleyError error) {
-		Log.e(TAG, error.getMessage());
+		Log.e(TAG, String.valueOf(error.networkResponse.statusCode));
 
 		// 失败处理
 		callFailure();
