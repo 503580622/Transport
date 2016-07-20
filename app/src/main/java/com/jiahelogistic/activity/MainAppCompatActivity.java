@@ -2,8 +2,6 @@ package com.jiahelogistic.activity;
 
 import android.os.Bundle;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -65,7 +63,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_main_activity_toolbar);
 		setSupportActionBar(toolbar);
 
 		// Create the adapter that will return a fragment for each of the three
@@ -73,20 +71,12 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.container);
+		mViewPager = (ViewPager) findViewById(R.id.jh_main_activity_container);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
-		TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+		TabLayout tabLayout = (TabLayout) findViewById(R.id.jh_main_activity_tabs);
+		TabLayout.Tab tab = tabLayout.newTab();
 		tabLayout.setupWithViewPager(mViewPager);
-
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();
-			}
-		});
 
 		// 处理升级信息
 		Bundle bundle = getIntent().getExtras();
