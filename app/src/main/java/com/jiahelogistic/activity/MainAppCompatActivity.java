@@ -14,16 +14,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jiahelogistic.R;
 import com.jiahelogistic.bean.KeyValue;
+import com.jiahelogistic.bean.UpgradeBean;
 import com.jiahelogistic.handler.BasicNetworkHandler;
 import com.jiahelogistic.net.FileManager;
 import com.jiahelogistic.widget.DialogFactory;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Li Huanling
@@ -33,8 +34,14 @@ import java.io.IOException;
  */
 public class MainAppCompatActivity extends BasicAppCompatActivity {
 
+	/**
+	 * 设置标识
+	 */
 	private static final String TAG = "MainAppCompatActivity";
 
+	/**
+	 * 基本处理器
+	 */
 	private BasicNetworkHandler mHandler = new BasicNetworkHandler(app) {
 		@Override
 		public void handleMessage(Message msg) {
@@ -42,6 +49,16 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 			super.handleMessage(msg);
 		}
 	};
+
+	/**
+	 * 设置Tab名
+	 */
+	private String[] mTabTitles = new String[] {"首页", "我的"};
+
+	/**
+	 * 设置Tab图片资源
+	 */
+	private int[] mTabView = new int[] {R.drawable.ic_home_black_18dp, R.drawable.ic_person_black_18dp};
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -75,14 +92,15 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
 		TabLayout tabLayout = (TabLayout) findViewById(R.id.jh_main_activity_tabs);
-		TabLayout.Tab tab = tabLayout.newTab();
 		tabLayout.setupWithViewPager(mViewPager);
 
 		// 处理升级信息
 		Bundle bundle = getIntent().getExtras();
 		boolean isNeedUpgrade = bundle.getBoolean("isNeedUpgrade");
 		if (isNeedUpgrade) {
-			Log.e(TAG, bundle.getParcelable("upgrade").toString());
+			UpgradeBean upgradeBean = bundle.getParcelable("upgrade");
+			assert upgradeBean != null;
+			Log.e(TAG, upgradeBean.toString());
 			// 升级提示
 			DialogFactory.createCommonRequestDialog(this, "我的宝贝乖老婆").show();
 		}
@@ -119,8 +137,6 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 					}
 				}
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -177,22 +193,25 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			// 根据标题数量
+			return mTabTitles.length;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			switch (position) {
-				case 0:
-					return "SECTION 1";
-				case 1:
-					return "SECTION 2";
-				case 2:
-					return "SECTION 3";
-			}
-			return null;
+			return mTabTitles[position];
 		}
+
+		public View getTabView(int position) {
+			View view = LayoutInflater.from(MainAppCompatActivity.this).inflate(R.layout.tab_item, null);
+			ImageView imageView = (ImageView) view.findViewById(R.id.jh_tab_item_image_view);
+			imageView.setImageResource(mTabView[position]);
+
+			TextView textView = (TextView) view.findViewById(R.id.jh_tab_item_text_view);
+			textView.setText(mTabTitles[position]);
+			return view;
+		}
+
 	}
 
 	/**
@@ -216,7 +235,8 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 			fragment.setArguments(args);
 			return fragment;
-		}		public PlaceholderFragment() {
+		}
+		public PlaceholderFragment() {
 		}
 
 		@Override

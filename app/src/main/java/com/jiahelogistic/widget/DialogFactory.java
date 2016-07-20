@@ -28,7 +28,7 @@ public class DialogFactory {
 		// 初始化Dialog，同时设置了样式
 		final Dialog dialog = new Dialog(context, R.style.dialog);
 		// 设置Dialog显示的内容，即布局dialog_layout
-		dialog.setContentView(R.layout.dialog_layout);
+		dialog.setContentView(R.layout.dialog_normal);
 		// 利用Window和WindowManager设置Dialog的宽度
 		Window window = dialog.getWindow();
 		WindowManager.LayoutParams lp = window.getAttributes();
