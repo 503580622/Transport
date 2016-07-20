@@ -1,30 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
+              android:layout_width="300dp"
+              android:layout_height="180dp"
               android:background="@drawable/shape_dialog"
-              android:gravity="center_horizontal"
               android:layout_gravity="center"
-              android:orientation="vertical"
-              android:paddingBottom="15dp"
               android:paddingLeft="30dp"
               android:paddingRight="30dp"
-              android:paddingTop="15dp" >
+              android:paddingTop="5dp"
+              android:weightSum="1"
+              android:orientation="vertical">
 
-	<ProgressBar
-		android:id="@+id/jh_common_dialog_progress"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		style="@android:style/Widget.ProgressBar.Large"
-		android:indeterminateDrawable="@anim/progress_bar"
-		android:indeterminate="false"/>
 
-	<TextView
-		android:id="@+id/jh_common_dialog_txt"
-		android:layout_width="wrap_content"
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:gravity="top"
+		android:layout_height="wrap_content">
+
+		<ImageView
+			android:layout_width="30dp"
+			android:layout_height="30dp"
+			android:background="@drawable/dialog_warning"
+			android:id="@+id/imageView"/>
+
+		<TextView
+			android:id="@+id/jh_dialog_title"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:textColor="#ffffffff"
+			android:text="有可用的升级"
+			android:textSize="20.0sp"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:paddingTop="15dp"
-		android:textColor="#ffffffff"
-		android:textSize="20.0sp" />
+		android:layout_weight="1.0"
+		android:layout_gravity="center_horizontal">
+
+		<TextView
+			android:id="@+id/jh_common_dialog_txt"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingTop="15dp"
+			android:textColor="#ffffffff"
+			android:textSize="20.0sp"
+			android:text="很好，快升级把:-D"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="bottom">
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="New Button"
+			android:id="@+id/button"/>
+	</LinearLayout>
+
 
 </LinearLayout>
