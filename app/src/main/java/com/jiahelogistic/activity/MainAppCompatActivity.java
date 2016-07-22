@@ -25,6 +25,8 @@ import com.jiahelogistic.net.FileManager;
 import com.jiahelogistic.widget.DialogFactory;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Li Huanling
@@ -58,17 +60,17 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	/**
 	 * 设置Tab图片资源
 	 */
-	private int[] mTabView = new int[] {R.drawable.ic_home_black_18dp, R.drawable.ic_person_black_18dp};
+	private int[] mTabViewIds = new int[] {R.drawable.ic_home_black_18dp, R.drawable.ic_person_black_18dp};
 
 	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a
-	 * {@link FragmentPagerAdapter} derivative, which will keep every
-	 * loaded fragment in memory. If this becomes too memory intensive, it
-	 * may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
+	 * 标签布局
 	 */
-	private SectionsPagerAdapter mSectionsPagerAdapter;
+	private TabLayout tabLayout;
+
+	/**
+	 * 标签列
+	 */
+	private List<TabLayout.Tab> tabList;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -80,20 +82,72 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		tabList = new ArrayList<>();
+
 		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_main_activity_toolbar);
 		setSupportActionBar(toolbar);
 
-		// Create the adapter that will return a fragment for each of the three
-		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.jh_main_activity_container);
-		mViewPager.setAdapter(mSectionsPagerAdapter);
 
-		TabLayout tabLayout = (TabLayout) findViewById(R.id.jh_main_activity_tabs);
+		tabLayout  = (TabLayout) findViewById(R.id.jh_main_activity_tabs);
+
+		mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+			@Override
+			public Fragment getItem(int position) {
+				return PlaceholderFragment.newInstance(position);
+			}
+
+			@Override
+			public int getCount() {
+				return mTabTitles.length;
+			}
+
+			@Override
+			public CharSequence getPageTitle(int position) {
+				return mTabTitles[position];
+			}
+		});
+
 		tabLayout.setupWithViewPager(mViewPager);
 
+		TabLayout.Tab tab;
+		for (int i = 0; i < mTabTitles.length; i++) {
+			// 新标签
+			tab = tabLayout.getTabAt(i);
+			View view = LayoutInflater.from(MainAppCompatActivity.this).inflate(R.layout.tab_item, null);
+			ImageView imageView = (ImageView) view.findViewById(R.id.jh_tab_item_image_view);
+			imageView.setImageResource(mTabViewIds[i]);
+
+			TextView textView = (TextView) view.findViewById(R.id.jh_tab_item_text_view);
+			textView.setText(mTabTitles[i]);
+			tab.setCustomView(view);
+			tabList.add(tab);
+		}
+
+		tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+			@Override
+			public void onTabSelected(TabLayout.Tab tab) {
+				tabLayout.getTabAt(tab.getPosition()).setIcon(R.mipmap.ic_launcher);
+				mViewPager.setCurrentItem(tab.getPosition());
+			}
+
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab) {
+//				for (TabLayout.Tab t : tabList) {
+//					if (t == tab) {
+//						t.setIcon(mTabViewIds[tab.getPosition()]);
+//					}
+//				}
+			}
+
+			@Override
+			public void onTabReselected(TabLayout.Tab tab) {
+
+			}
+		});
+
+		tabLayout.setTabTextColors(R.color.colorAccent, R.color.colorPrimary);
 		// 处理升级信息
 		Bundle bundle = getIntent().getExtras();
 		boolean isNeedUpgrade = bundle.getBoolean("isNeedUpgrade");
@@ -200,16 +254,6 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		@Override
 		public CharSequence getPageTitle(int position) {
 			return mTabTitles[position];
-		}
-
-		public View getTabView(int position) {
-			View view = LayoutInflater.from(MainAppCompatActivity.this).inflate(R.layout.tab_item, null);
-			ImageView imageView = (ImageView) view.findViewById(R.id.jh_tab_item_image_view);
-			imageView.setImageResource(mTabView[position]);
-
-			TextView textView = (TextView) view.findViewById(R.id.jh_tab_item_text_view);
-			textView.setText(mTabTitles[position]);
-			return view;
 		}
 
 	}

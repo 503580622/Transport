@@ -41,6 +41,8 @@
 		app:tabIndicatorHeight="0dp"
 		app:tabMode="fixed"
 		app:tabSelectedTextColor="#FF4081"
-		app:tabTextColor="#000" android:layout_gravity="bottom"/>
+		app:tabIndicatorColor="@android:color/holo_red_light"
+		app:tabTextColor="#000"
+		android:layout_gravity="bottom"/>
 
 </LinearLayout>

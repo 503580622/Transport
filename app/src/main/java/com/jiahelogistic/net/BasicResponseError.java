@@ -57,7 +57,9 @@ public class BasicResponseError implements Response.ErrorListener, Callback {
 	 */
 	@Override
 	public void onErrorResponse(VolleyError error) {
-		Log.e(TAG, String.valueOf(error.networkResponse.statusCode));
+		if (error.networkResponse != null) {
+			Log.e(TAG, String.valueOf(error.networkResponse.statusCode));
+		}
 
 		// 失败处理
 		callFailure();
