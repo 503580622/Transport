@@ -125,10 +125,12 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 			tabList.add(tab);
 		}
 
-		tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
-				tabLayout.getTabAt(tab.getPosition()).setIcon(R.mipmap.ic_launcher);
+				View view = tab.getCustomView();
+				ImageView imageView = (ImageView) view.findViewById(R.id.jh_tab_item_image_view);
+				imageView.setImageResource(R.mipmap.ic_launcher);
 				mViewPager.setCurrentItem(tab.getPosition());
 			}
 
