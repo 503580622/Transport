@@ -13,4 +13,10 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"/>
 
+	<Button
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="测试"
+		android:id="@+id/jh_main_btn_test"/>
+
 </RelativeLayout>

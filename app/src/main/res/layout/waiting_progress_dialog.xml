@@ -12,7 +12,7 @@
               android:paddingTop="15dp" >
 
 	<ProgressBar
-		android:id="@+id/jh_common_dialog_progress"
+		android:id="@+id/jh_dialog_common_progress"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		style="@android:style/Widget.ProgressBar.Large"
@@ -20,7 +20,7 @@
 		android:indeterminate="false"/>
 
 	<TextView
-		android:id="@+id/jh_common_dialog_txt"
+		android:id="@+id/jh_dialog_normal_content"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:paddingTop="15dp"

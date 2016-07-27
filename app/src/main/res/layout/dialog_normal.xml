@@ -19,15 +19,32 @@
 		<ImageView
 			android:layout_width="30dp"
 			android:layout_height="30dp"
+			android:contentDescription=""
 			android:background="@drawable/dialog_warning"
 			android:id="@+id/imageView"/>
 
 		<TextView
-			android:id="@+id/jh_dialog_title"
+			android:id="@+id/jh_dialog_normal_title"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:textColor="#ffffffff"
-			android:text="有可用的升级"
+			android:textSize="20.0sp"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1.0"
+		android:layout_gravity="center_horizontal">
+
+		<TextView
+			android:id="@+id/jh_dialog_normal_content"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingTop="15dp"
+			android:textColor="#ffffffff"
 			android:textSize="20.0sp"/>
 
 	</LinearLayout>
@@ -36,31 +53,23 @@
 		android:orientation="horizontal"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_weight="1.0"
-		android:layout_gravity="center_horizontal">
-
-		<TextView
-			android:id="@+id/jh_common_dialog_txt"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:paddingTop="15dp"
-			android:textColor="#ffffffff"
-			android:textSize="20.0sp"
-			android:text="很好，快升级把:-D"/>
-
-	</LinearLayout>
-
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="bottom">
+		android:gravity="center">
 
 		<Button
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="New Button"
-			android:id="@+id/button"/>
+			android:text="@string/jh_btn_yes"
+			android:layout_marginRight="15dp"
+			android:layout_marginEnd="15dp"
+			android:id="@+id/jh_dialog_btn_ok"/>
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/jh_btn_no"
+			android:layout_marginLeft="15dp"
+			android:layout_marginStart="15dp"
+			android:id="@+id/jh_dialog_btn_cancel"/>
 	</LinearLayout>
 
 

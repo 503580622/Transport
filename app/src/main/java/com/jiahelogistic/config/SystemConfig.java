@@ -21,4 +21,11 @@ public class SystemConfig {
 	 * 检查是否有更新可用
 	 */
 	public static final int SYSTEM_CHECK_UPGRADE = 2;
+
+
+
+	/**
+	 * 更新下载进度条
+	 */
+	public static final int UPDATE_DOWNLOAD_PROGRESS = 100;
 }

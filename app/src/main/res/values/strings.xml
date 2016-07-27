@@ -81,6 +81,9 @@
 	<string name="jh_pref_title_ringtone">Ringtone</string>
 	<string name="jh_pref_ringtone_silent">Silent</string>
 
-	<string name="jh_pref_title_vibrate">Vibrate</string>
+	<string name="jh_pref_title_vibrate" translatable="false">Vibrate</string>
+	<string name="jh_btn_yes">OK</string>
+	<string name="jh_btn_no">NO</string>
+	<string name="jh_schedule_progress_content">Downloading%1$d</string>
 
 </resources>

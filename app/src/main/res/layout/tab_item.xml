@@ -7,18 +7,15 @@
 
 	<ImageView
 		android:id="@+id/jh_tab_item_image_view"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_centerVertical="true"
-		android:src="@drawable/ic_person_black_18dp"
+		android:layout_width="30dp"
+		android:layout_height="30dp"
 	/>
 
 	<TextView
 		android:id="@+id/jh_tab_item_text_view"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_centerVertical="true"
-		android:text="我的"
+		android:textSize="12sp"
 	/>
 
 </LinearLayout>
