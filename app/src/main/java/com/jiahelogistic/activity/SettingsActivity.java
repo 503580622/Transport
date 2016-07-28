@@ -116,7 +116,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
 						preference.setSummary(null);
 					} else {
 						// Set the summary to reflect the new ringtone display
-						// name.
+						// runned.
 						String name = ringtone.getTitle(preference.getContext());
 						preference.setSummary(name);
 					}

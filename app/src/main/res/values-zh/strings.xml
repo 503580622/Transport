@@ -22,5 +22,7 @@
 	<string name="jh_btn_yes">确定</string>
 	<string name="jh_btn_no">取消</string>
 	<string name="jh_schedule_progress_content">已下载%1$d</string>
+	<string name="jh_intro_skip">跳过</string>
+	<string name="jh_intro_done">开始</string>
 
 </resources>

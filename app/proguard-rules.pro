@@ -10,7 +10,7 @@
 # Add any project specific keep options here:
 
 # If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript helper
+# and specify the fully qualified class runned to the JavaScript helper
 # class:
 #-keepclassmembers class fqcn.of.javascript.helper.for.webview {
 #   public *;

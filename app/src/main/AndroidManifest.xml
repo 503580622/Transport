@@ -58,6 +58,10 @@
 			android:name=".activity.SettingsActivity"
 			android:label="@string/jh_title_activity_settings">
 		</activity>
+		<activity
+			android:name=".activity.IntroAppActivity"
+			android:theme="@style/FullscreenTheme">
+		</activity>
 
 		<!-- Broadcast -->
 		<receiver
@@ -65,7 +69,7 @@
 			android:enabled="true"
 			android:exported="true">
 			<intent-filter>
-				<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+				<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
 			</intent-filter>
 		</receiver>
 	</application>

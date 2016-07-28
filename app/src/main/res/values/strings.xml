@@ -85,5 +85,7 @@
 	<string name="jh_btn_yes">OK</string>
 	<string name="jh_btn_no">NO</string>
 	<string name="jh_schedule_progress_content">Downloading%1$d</string>
+	<string name="jh_intro_skip">SKIP</string>
+	<string name="jh_intro_done">DONE</string>
 
 </resources>
