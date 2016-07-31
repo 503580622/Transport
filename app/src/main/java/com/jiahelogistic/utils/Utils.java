@@ -1,10 +1,16 @@
 package com.jiahelogistic.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.jiahelogistic.JiaHeLogistic;
+
+import java.util.Iterator;
+import java.util.Stack;
 
 /**
  * Created by Li Huanling
@@ -23,13 +29,25 @@ public class Utils {
 		Toast.makeText(c, msg, duration).show();
 	}
 
+	public static final void Exit() {
+		Stack<Activity> stack = JiaHeLogistic.getInstance().getStack();
+		Iterator<Activity> iterator = stack.iterator();
+		while (iterator.hasNext()) {
+			Activity activity = iterator.next();
+			activity.finish();
+		}
+
+		android.os.Process.killProcess(android.os.Process.myPid());
+		System.exit(0);
+	}
+
 	/**
 	 * 返回当前程序版本号
 	 *
 	 * @param context 上下文
 	 * @return 版本号
 	 */
-	@SuppressWarnings("Unused")
+	@SuppressWarnings({"unused", "UnusedAssignment"})
 	public static String getAppVersionName(Context context) {
 		String versionName = "";
 		int versioncode = 0;

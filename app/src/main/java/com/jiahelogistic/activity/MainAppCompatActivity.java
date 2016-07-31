@@ -2,6 +2,7 @@ package com.jiahelogistic.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -46,7 +47,7 @@ import rx.functions.Action0;
 /**
  * Created by Li Huanling
  * On 2016/07/17 16:23
- * <p/>
+ *
  * 主界面
  */
 public class MainAppCompatActivity extends BasicAppCompatActivity {
@@ -55,6 +56,16 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	 * 设置标识
 	 */
 	private static final String TAG = "MainAppCompatActivity";
+
+	/**
+	 * 3秒内按2次后退退出应用
+	 */
+	private static final int EXIT_APP_TIMEOUT = 3000;
+
+	/**
+	 * 退出标志
+	 */
+	private boolean exitFlag = false;
 
 	/**
 	 * 基本处理器
@@ -68,6 +79,11 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 					String string = String.format(getString(R.string.jh_schedule_progress_content), msg.arg1) + "%";
 					textView.setText(string);
 					break;
+
+				case SystemConfig.SYSTEM_RESET_EXIT_FLAG:
+					exitFlag = false;
+					break;
+
 				default:
 					super.handleMessage(msg);
 					break;
@@ -76,14 +92,19 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	};
 
 	/**
-	 * 设置Tab名
+	 * 设置Tab名资源数组
 	 */
-	private String[] mTabTitles = new String[]{"首页", "我的"};
+	private static String[] mTabTitles = new String[]{"首页", "我的"};
 
 	/**
-	 * 设置Tab图片资源
+	 * 设置Tab图片资源数组
 	 */
-	private int[] mTabViewIds = new int[]{R.drawable.ic_home_black_18dp, R.drawable.ic_person_black_24dp};
+	private static int[] mTabViewIds = new int[]{R.drawable.ic_home_black_18dp, R.drawable.ic_person_black_24dp};
+
+	/**
+	 * 设置布局资源数组
+	 */
+	private static int[] mLayoutIds = new int[] {R.layout.fragment_main, R.layout.fragment_ucenter};
 
 	/**
 	 * 标签布局
@@ -143,7 +164,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
 			@Override
 			public Fragment getItem(int position) {
-				return PlaceholderFragment.newInstance(position);
+				return PlaceholderFragment.newInstance(MainAppCompatActivity.this, position);
 			}
 
 			@Override
@@ -164,7 +185,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 			// 新标签
 			tab = tabLayout.getTabAt(i);
 			View view = LayoutInflater.from(MainAppCompatActivity.this).inflate(R.layout.tab_item, null);
-			changeSelectedTab(view, i, i == 0 ? true : false);
+			changeSelectedTab(view, i, i == 0);
 			tab.setCustomView(view);
 		}
 
@@ -394,35 +415,27 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-
 	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
+	 * Take care of popping the fragment back stack or finishing the activity
+	 * as appropriate.
 	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+	@Override
+	public void onBackPressed() {
+		if (exitFlag) {
+			Utils.Exit();
+		} else {
+			// 显示提示信息
+			String string = getString(R.string.jh_app_exit);
+			Utils.showToast(this, String.format(string, getString(R.string.jh_app_name)), Toast.LENGTH_SHORT);
 
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
+			// 设置退出标志
+			exitFlag = true;
+
+			// 如果指定时间内没有再按后退按钮，则清除退出标志
+			Message msg = Message.obtain();
+			msg.what = SystemConfig.SYSTEM_RESET_EXIT_FLAG;
+			mHandler.sendMessageDelayed(msg, EXIT_APP_TIMEOUT);
 		}
-
-		@Override
-		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a PlaceholderFragment (defined as a static inner class below).
-			return PlaceholderFragment.newInstance(position + 1);
-		}
-
-		@Override
-		public int getCount() {
-			// 根据标题数量
-			return mTabTitles.length;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return mTabTitles[position];
-		}
-
 	}
 
 	/**
@@ -435,12 +448,18 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		 */
 		private static final String ARG_SECTION_NUMBER = "section_number";
 
+		/**
+		 * 主界面
+		 */
+		private static MainAppCompatActivity activity;
+
 
 		/**
 		 * Returns a new instance of this fragment for the given section
 		 * number.
 		 */
-		public static PlaceholderFragment newInstance(int sectionNumber) {
+		public static PlaceholderFragment newInstance(MainAppCompatActivity activity, int sectionNumber) {
+			PlaceholderFragment.activity = activity;
 			PlaceholderFragment fragment = new PlaceholderFragment();
 			Bundle args = new Bundle();
 			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -454,7 +473,25 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 		                         Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+			// 获得参数
+			Bundle args = getArguments();
+			int sectionNumber = args.getInt(ARG_SECTION_NUMBER);
+
+
+			View rootView = inflater.inflate(mLayoutIds[sectionNumber],
+					container, false);
+
+			if (sectionNumber == 1) {
+				ImageView imageView = (ImageView) rootView.findViewById(R.id.jh_btn_ucenter_setting);
+				imageView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						// 启动设置界面
+						Intent intent = new Intent(activity, SettingsActivity.class);
+						activity.startActivity(intent);
+					}
+				});
+			}
 			TextView textView = (TextView) rootView.findViewById(R.id.section_label);
 			textView.setText(getString(R.string.jh_section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 			return rootView;

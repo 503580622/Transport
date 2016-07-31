@@ -87,5 +87,6 @@
 	<string name="jh_schedule_progress_content">Downloading%1$d</string>
 	<string name="jh_intro_skip">SKIP</string>
 	<string name="jh_intro_done">DONE</string>
+	<string name="jh_app_exit">Press back again to exit %1$s</string>
 
 </resources>

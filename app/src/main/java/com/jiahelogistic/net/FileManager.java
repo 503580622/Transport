@@ -37,16 +37,6 @@ public class FileManager {
 	 */
 	private static final OkHttpClient client = new OkHttpClient();
 
-	public static final void Exit() {
-		JiaHeLogistic app = JiaHeLogistic.getInstance();
-		for (Activity activity : app.getStack()) {
-			if (activity != null) {
-				activity.finish();
-			}
-		}
-		android.os.Process.killProcess(android.os.Process.myPid());
-		System.exit(0);
-	}
 
 	/**
 	 * 异步提交数据

@@ -51,8 +51,8 @@ public class JiaHeLogistic extends Application {
 		mStack = new Stack<>();
 
 		// 注册全局异常处理器
-		CrashHandler crashHandler = CrashHandler.getInstance();
-		crashHandler.init(getApplicationContext());
+		//CrashHandler crashHandler = CrashHandler.getInstance();
+		//crashHandler.init(getApplicationContext());
 	}
 
 	public Stack<Activity> getStack() {

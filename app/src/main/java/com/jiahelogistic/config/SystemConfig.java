@@ -18,11 +18,29 @@ public class SystemConfig {
 	public static final int SYSTEM_MAIN_ACTIVITY = 1;
 
 	/**
+	 * 跳转导航页
+	 */
+	public static final int SYSTEM_VIEW_ACTIVITY = 2;
+
+	/**
 	 * 检查是否有更新可用
 	 */
-	public static final int SYSTEM_CHECK_UPGRADE = 2;
+	public static final int SYSTEM_CHECK_UPGRADE = 3;
+
+	/**
+	 * 重置退出标志
+	 */
+	public static final int SYSTEM_RESET_EXIT_FLAG = 4;
 
 
+	/*****************************************************/
+
+	/**
+	 * 配置文件名
+	 */
+	public static final String CONFIG_NAME = "config";
+
+	/*****************************************************/
 
 	/**
 	 * 更新下载进度条

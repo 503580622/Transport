@@ -28,8 +28,12 @@ public class IntroAppActivity extends AppIntro {
 	}
 
 	private void loadMainActivity(){
+		// 获取升级信息
+		Bundle bundle = getIntent().getExtras();
 		Intent intent = new Intent(this, MainAppCompatActivity.class);
+		intent.putExtras(bundle);
 		startActivity(intent);
+		finish();
 	}
 
 	@Override

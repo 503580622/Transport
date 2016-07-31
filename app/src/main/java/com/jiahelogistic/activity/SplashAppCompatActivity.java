@@ -1,6 +1,7 @@
 package com.jiahelogistic.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
@@ -29,7 +30,7 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 	/**
 	 * 设置自动跳转主界面的时间（默认3秒）
 	 */
-	private static final int AUTO_START_MAIN_ACTIVITY = 3000;
+	private static final int AUTO_START_MAIN_ACTIVITY = 1000;
 
 	private final BasicNetworkHandler mHandler = new BasicNetworkHandler(app) {
 		/**
@@ -44,26 +45,21 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			// 处理网络连接失败
-			super.handleMessage(msg);
-
 			switch (msg.what) {
 				case SystemConfig.SYSTEM_MAIN_ACTIVITY:
 					// 进入主activity
-					Intent intent = new Intent(SplashAppCompatActivity.this,
+					Intent intentMainActivity = new Intent(SplashAppCompatActivity.this,
 							MainAppCompatActivity.class);
 
-					Bundle bundle = new Bundle();
-					bundle.putBoolean("isNeedUpgrade", isNeedUpgrade);
+					myStartActivity(intentMainActivity);
+					break;
 
-					// 是否需要升级
-					if (isNeedUpgrade) {
-						bundle.putParcelable("upgrade", bean);
-					}
-					intent.putExtras(bundle);
-					startActivity(intent);
-					// 不加入activity栈中，防止在主界面后退回到此界面
-					SplashAppCompatActivity.this.finish();
+				case SystemConfig.SYSTEM_VIEW_ACTIVITY:
+					// 进入导航页
+					Intent intentIntroActivity = new Intent(SplashAppCompatActivity.this,
+							IntroAppActivity.class);
+
+					myStartActivity(intentIntroActivity);
 					break;
 
 				case SystemConfig.SYSTEM_CHECK_UPGRADE:
@@ -82,7 +78,23 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 					break;
 
 				default:
+					// 处理网络连接失败
+					super.handleMessage(msg);
 			}
+		}
+
+		private void myStartActivity(Intent intent) {
+			Bundle bundle = new Bundle();
+			bundle.putBoolean("isNeedUpgrade", isNeedUpgrade);
+
+			// 是否需要升级
+			if (isNeedUpgrade) {
+				bundle.putParcelable("upgrade", bean);
+			}
+			intent.putExtras(bundle);
+			startActivity(intent);
+			// 不加入activity栈中，防止在主界面后退回到此界面
+			SplashAppCompatActivity.this.finish();
 		}
 	};
 
@@ -96,7 +108,23 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 			@Override
 			public void run() {
 				Message msg = Message.obtain();
-				msg.what = SystemConfig.SYSTEM_MAIN_ACTIVITY;
+
+				// 获取配置
+				SharedPreferences sharedPreferences = getSharedPreferences(SystemConfig.CONFIG_NAME, MODE_PRIVATE);
+				boolean runned = sharedPreferences.getBoolean("runned", false);
+				if (!runned) {
+					// 第一次运行应用，进入导航页
+					msg.what = SystemConfig.SYSTEM_VIEW_ACTIVITY;
+
+					// 保存
+					SharedPreferences.Editor editor = sharedPreferences.edit();
+					editor.putBoolean("runned", true);
+					editor.commit();
+				} else {
+					// 进入主页面
+					msg.what = SystemConfig.SYSTEM_MAIN_ACTIVITY;
+				}
+
 				mHandler.sendMessageDelayed(msg, AUTO_START_MAIN_ACTIVITY);
 
 				// TODO 其他网络需要
@@ -119,6 +147,6 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		stack.pop();
+		stack.remove(this);
 	}
 }

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.jiahelogistic.net.FileManager;
+import com.jiahelogistic.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -93,7 +94,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
 				Log.e(TAG, e.getStackTrace().toString());
 			}
 			Log.e(TAG, "Ready To Exit Progress");
-			FileManager.Exit();
+			Utils.Exit();
 		}
 	}
 

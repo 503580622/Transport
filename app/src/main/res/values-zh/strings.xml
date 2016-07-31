@@ -24,5 +24,7 @@
 	<string name="jh_schedule_progress_content">已下载%1$d</string>
 	<string name="jh_intro_skip">跳过</string>
 	<string name="jh_intro_done">开始</string>
+	<string name="jh_section_format">你好世界从:%1$d</string>
+	<string name="jh_app_exit">再按一次退出%1$s</string>
 
 </resources>

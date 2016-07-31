@@ -3,21 +3,21 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/jh_main_activity_content"
+	android:id="@+id/jh_settings_activity_content"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical"
-	tools:context=".activity.MainAppCompatActivity">
+	tools:context=".activity.SettingsActivity">
 
 	<android.support.design.widget.AppBarLayout
-		android:id="@+id/jh_main_activity_appbar"
+		android:id="@+id/jh_settings_activity_appbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:paddingTop="@dimen/appbar_padding_top"
 		android:theme="@style/AppTheme.AppBarOverlay">
 
 		<android.support.v7.widget.Toolbar
-			android:id="@+id/jh_main_activity_toolbar"
+			android:id="@+id/jh_settings_activity_toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="?attr/actionBarSize"
 			android:background="?attr/colorPrimary"
@@ -27,21 +27,14 @@
 		</android.support.v7.widget.Toolbar>
 	</android.support.design.widget.AppBarLayout>
 
-	<android.support.v4.view.ViewPager
-		android:id="@+id/jh_main_activity_container"
+	<LinearLayout
+		android:id="@+id/jh_ll_settings_content"
 		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:layout_weight="1"/>
+		android:layout_height="wrap_content"
+		android:background="@android:drawable/edit_text"
+		android:divider="@android:drawable/divider_horizontal_textfield"
+		android:orientation="vertical">
 
-	<android.support.design.widget.TabLayout
-		android:id="@+id/jh_main_activity_tabs"
-		android:layout_width="match_parent"
-		android:layout_height="50dp"
-		app:tabGravity="fill"
-		app:tabMode="fixed"
-		app:tabIndicatorHeight="0dp"
-		app:tabSelectedTextColor="#FF4081"
-		app:tabTextColor="#000"
-		android:layout_gravity="bottom"/>
+	</LinearLayout>
 
 </LinearLayout>
