@@ -88,5 +88,9 @@
 	<string name="jh_intro_skip">SKIP</string>
 	<string name="jh_intro_done">DONE</string>
 	<string name="jh_app_exit">Press back again to exit %1$s</string>
+	<string name="jh_settings_common_label">Common settings</string>
+	<string name="jh_settings_show_ads">is show ads</string>
+	<string name="jh_settings_show_ads_desc">Please help us improve</string>
+	<string name="jh_settings_clear_cache">Clear cache</string>
 
 </resources>

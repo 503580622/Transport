@@ -152,7 +152,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_main_activity_toolbar);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_common_activity_toolbar);
 		setSupportActionBar(toolbar);
 
 		// Set up the ViewPager with the sections adapter.

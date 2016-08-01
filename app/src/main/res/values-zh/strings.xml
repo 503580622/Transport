@@ -26,5 +26,9 @@
 	<string name="jh_intro_done">开始</string>
 	<string name="jh_section_format">你好世界从:%1$d</string>
 	<string name="jh_app_exit">再按一次退出%1$s</string>
+	<string name="jh_settings_common_label">通用</string>
+	<string name="jh_settings_show_ads">是否开启广告</string>
+	<string name="jh_settings_show_ads_desc">赚点小钱用来做的更好^_^</string>
+	<string name="jh_settings_clear_cache">清除缓存</string>
 
 </resources>

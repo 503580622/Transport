@@ -20,7 +20,7 @@ public class SettingsActivity extends BasicAppCompatActivity {
 
 		setContentView(R.layout.activity_settings);
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_settings_activity_toolbar);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_common_activity_toolbar);
 		setSupportActionBar(toolbar);
 
 		getFragmentManager().beginTransaction()

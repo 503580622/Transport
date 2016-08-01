@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="@android:color/white"
+              android:gravity="center_vertical"
+              android:minHeight="?android:listPreferredItemHeight"
+              android:paddingRight="?android:scrollbarSize" >
+
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="1.0dip"
+		android:layout_marginLeft="16.0dip"
+		android:layout_marginRight="6.0dip"
+		android:layout_marginTop="1.0dip"
+		android:layout_weight="1.0" >
+
+		<TextView
+			android:id="@+id/jh_normal_preference_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingLeft="15dp"
+			android:ellipsize="marquee"
+			android:layout_centerVertical="true"
+			android:fadingEdge="horizontal"
+			android:singleLine="true"
+			android:text="清除缓存"
+			android:textColor="@android:color/black"
+			android:textSize="20.0sp" />
+
+		<TextView
+			android:id="@+id/jh_normal_preference_subtitle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentRight="true"
+			android:text="20MB"
+			android:maxLines="4"
+			android:textColor="@android:color/black"
+			android:textSize="14.0sp" />
+	</RelativeLayout>
+
+</LinearLayout>
