@@ -21,11 +21,12 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:paddingLeft="15dp"
+			android:paddingStart="15dp"
+			android:paddingRight="15dp"
 			android:ellipsize="marquee"
 			android:layout_centerVertical="true"
 			android:fadingEdge="horizontal"
 			android:singleLine="true"
-			android:text="清除缓存"
 			android:textColor="@android:color/black"
 			android:textSize="20.0sp" />
 
@@ -35,8 +36,6 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentEnd="true"
 			android:layout_alignParentRight="true"
-			android:text="20MB"
-			android:maxLines="4"
 			android:textColor="@android:color/black"
 			android:textSize="14.0sp" />
 	</RelativeLayout>

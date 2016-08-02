@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.jiahelogistic.R;
+import com.jiahelogistic.utils.DataCleanManager;
 
 /**
  * Created by Huanling
@@ -23,18 +24,24 @@ public class NormalPreference extends Preference {
 	private final Context mContext;
 
 	/**
-	 * 子标题
+	 * 点击监听器
 	 */
-	private String subTitle;
+	private OnClickListener onClickListener;
 
 	/**
-	 * 引用ID
+	 * 标题
 	 */
-	private int id;
+	private String title;
+
+	/**
+	 * 缓存控件
+	 */
+	private TextView cacheTextView;
 
 	public NormalPreference(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		mContext = context;
+		setLayoutResource(R.layout.normal_preference);
 	}
 
 	public NormalPreference(Context context, AttributeSet attrs) {
@@ -42,12 +49,8 @@ public class NormalPreference extends Preference {
 		mContext = context;
 		setLayoutResource(R.layout.normal_preference);
 
-		TypedArray typedArray = context.obtainStyledAttributes(attrs,
-				R.styleable.NormalPreference);
-
-		subTitle = typedArray.getString(R.styleable.NormalPreference_subTitle);
-		id = typedArray.getInt(R.styleable.NormalPreference_id, 0);
-
+		TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.NormalPreference);
+		title = typedArray.getString(R.styleable.NormalPreference_android_title);
 		typedArray.recycle(); //回收资源
 	}
 
@@ -62,10 +65,49 @@ public class NormalPreference extends Preference {
 		super.setTitle(titleResId);
 	}
 
+	@SuppressWarnings({"unused"})
+	public void setOnClickListener(OnClickListener onClickListener) {
+		this.onClickListener = onClickListener;
+	}
+
 	@Override
 	protected void onBindView(View view) {
 		super.onBindView(view);
-		TextView subTitleView = (TextView) view.findViewById(R.id.jh_normal_preference_subtitle);
-		subTitleView.setText(subTitle);
+		cacheTextView = (TextView) view.findViewById(R.id.jh_normal_preference_subtitle);
+		TextView titleView = (TextView) view.findViewById(R.id.jh_normal_preference_title);
+		titleView.setText(title);
+
+		// 计算缓存
+		calCacheValue();
+
+		// 点击事件
+		if (onClickListener != null) {
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					onClickListener.click(NormalPreference.this);
+				}
+			});
+		}
 	}
+
+	public interface OnClickListener {
+		void click(NormalPreference normalPreference);
+	}
+
+	/**
+	 * 计算缓存大小
+	 */
+	public void calCacheValue() {
+		String cache;
+		try {
+			cache = DataCleanManager.getTotalCacheSize(mContext);
+		} catch (Exception e) {
+			// 默认0KB
+			cache = "0KB";
+		}
+		cacheTextView.setText(cache);
+	}
+
+
 }

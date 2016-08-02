@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:norprefer="http://schemas.android.com/apk/res/com.jiahelogistic">
+	xmlns:android="http://schemas.android.com/apk/res/android">
 	<SwitchPreference
 		android:key="jh_settings_open_ads"
 	    android:title="@string/jh_settings_show_ads"
@@ -10,9 +9,8 @@
 		/>
 
 	<com.jiahelogistic.preference.NormalPreference
-		android:title="@string/jh_settings_clear_cache"
-		norprefer:id="@+id/jh_normal_preference"
-		norprefer:subTitle="20MB"/>
+		android:key="clean_cache"
+		android:title="@string/jh_settings_clear_cache"/>
 
 	<PreferenceCategory
 		android:title="@string/jh_settings_common_label"

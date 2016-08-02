@@ -8,10 +8,8 @@
 		<attr name="metaButtonBarStyle" format="reference"/>
 		<attr name="metaButtonBarButtonStyle" format="reference"/>
 	</declare-styleable>
-	
-	<declare-styleable name="NormalPreference">
-		<attr name="subTitle" format="string"/>
-		<attr name="id" format="reference"/>
-	</declare-styleable>
 
+	<declare-styleable name="NormalPreference">
+		<attr name="android:title"/>
+	</declare-styleable>
 </resources>

@@ -9,6 +9,8 @@ import android.test.ApplicationTestCase;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.jiahelogistic.utils.DataCleanManager;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -18,13 +20,15 @@ import java.io.IOException;
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
 public class ApplicationTest extends ApplicationTestCase<Application> {
+	private final static String TAG = "ApplicationTest";
+
 	public ApplicationTest() {
 		super(Application.class);
 	}
 
 	public void testDeviceInfo() {
 		String deviceId = getDeviceInfo(getContext());
-		Log.e("testDeviceInfo", deviceId == null ? "none" : deviceId);
+		Log.e(TAG, deviceId == null ? "none" : deviceId);
 	}
 
 	public static boolean checkPermission(Context context, String permission) {
@@ -101,5 +105,27 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * 测试计算缓存，清除缓存
+	 */
+	public void testCalcCache() {
+		String cacheSize;
+		try {
+			cacheSize = DataCleanManager.getTotalCacheSize(getContext());
+		} catch (Exception e) {
+			cacheSize = "未知";
+		}
+		Log.e(TAG, "清除缓存前有:" + cacheSize);
+
+		// 清除缓存
+		DataCleanManager.clearAllCache(getContext());
+		try {
+			cacheSize = DataCleanManager.getTotalCacheSize(getContext());
+		} catch (Exception e) {
+			cacheSize = "未知";
+		}
+		Log.e(TAG, "清除缓存后有:" + cacheSize);
 	}
 }
