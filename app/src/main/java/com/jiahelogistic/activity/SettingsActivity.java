@@ -2,6 +2,7 @@ package com.jiahelogistic.activity;
 
 
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.v7.widget.Toolbar;
 
 import com.jiahelogistic.R;

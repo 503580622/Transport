@@ -92,5 +92,13 @@
 	<string name="jh_settings_show_ads">is show ads</string>
 	<string name="jh_settings_show_ads_desc">Please help us improve</string>
 	<string name="jh_settings_clear_cache">Clear cache</string>
+	<string name="jh_preference_about">About</string>
+	<string name="jh_preference_about_detail">Scan QR code, your friend can download %1$s client
+	</string>
+	<string name="jh_preference_copyright">Copyright2004-2016\n%1$s%2$s all right reserved</string>
+	<string name="jh_preference_logo_desc">logo</string>
+	<string name="jh_preference_qr_desc">QR code</string>
+	<string name="jh_site_url" translatable="false">jiahelogistic.com</string>
+	<string name="jh_title_activity_about">About</string>
 
 </resources>

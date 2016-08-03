@@ -105,8 +105,8 @@ public class NormalPreference extends Preference {
 		try {
 			cache = DataCleanManager.getTotalCacheSize(mContext);
 		} catch (Exception e) {
-			// 默认0KB
-			cache = "0KB";
+			// 默认0MB
+			cache = "0MB";
 		}
 		cacheTextView.setText(cache);
 	}

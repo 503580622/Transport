@@ -8,27 +8,21 @@
 	    android:defaultValue="true"
 		/>
 
-	<com.jiahelogistic.preference.NormalPreference
-		android:key="clean_cache"
-		android:title="@string/jh_settings_clear_cache"/>
-
 	<PreferenceCategory
 		android:title="@string/jh_settings_common_label"
 		android:key="pref_key_storage_settings">
-		<CheckBoxPreference
-			android:key="pref_key_auto_delete"
-			android:summary="456"
-			android:title="agd"
-			android:defaultValue="false" />
-		<Preference
-			android:key="pref_key_sms_delete_limit"
-			android:dependency="pref_key_auto_delete"
-			android:summary="哈哈哈"
-			android:title="嚯嚯嚯嚯"/>
-		<Preference
-			android:key="pref_key_mms_delete_limit"
-			android:dependency="pref_key_auto_delete"
-			android:summary="哟西哟而"
-			android:title="测试用的" />
+
+		<com.jiahelogistic.preference.NormalPreference
+			android:key="clean_cache"
+			android:title="@string/jh_settings_clear_cache"/>
+
+		<PreferenceScreen
+			android:title="@string/jh_preference_about">
+			<intent
+				android:action="android.intent.action.MAIN"
+				android:targetPackage="com.jiahelogistic"
+				android:targetClass="com.jiahelogistic.activity.AboutUsActivity" />
+		</PreferenceScreen>
+
 	</PreferenceCategory>
 </PreferenceScreen>

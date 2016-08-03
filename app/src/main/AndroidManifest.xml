@@ -73,6 +73,12 @@
 				<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
 			</intent-filter>
 		</receiver>
+
+		<activity
+			android:name=".activity.AboutUsActivity"
+			android:label="@string/jh_title_activity_about"
+			android:theme="@style/AppTheme.NoActionBar">
+		</activity>
 	</application>
 
 </manifest>

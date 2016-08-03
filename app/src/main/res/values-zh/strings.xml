@@ -30,5 +30,11 @@
 	<string name="jh_settings_show_ads">是否开启广告</string>
 	<string name="jh_settings_show_ads_desc">赚点小钱用来做的更好^_^</string>
 	<string name="jh_settings_clear_cache">清除缓存</string>
+	<string name="jh_preference_about">关于</string>
+	<string name="jh_preference_about_detail">扫描二维码，您的朋友也可以下载%1$s客户端</string>
+	<string name="jh_preference_logo_desc">徽标</string>
+	<string name="jh_preference_qr_desc">二维码</string>
+	<string name="jh_preference_copyright">Copyright2004-2016\n%1$s%2$s 版权所有</string>
+	<string name="jh_title_activity_about">关于</string>
 
 </resources>
