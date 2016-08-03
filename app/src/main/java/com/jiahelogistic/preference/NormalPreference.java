@@ -86,6 +86,8 @@ public class NormalPreference extends Preference {
 				@Override
 				public void onClick(View view) {
 					onClickListener.click(NormalPreference.this);
+					// IMPORTANT 清理换成后，更新数据
+					NormalPreference.this.notifyChanged();
 				}
 			});
 		}

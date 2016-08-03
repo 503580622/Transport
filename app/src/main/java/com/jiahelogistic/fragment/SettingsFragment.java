@@ -22,7 +22,7 @@ import com.jiahelogistic.utils.Utils;
  *
  * 设置片段
  */
-public class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragment {
 
 	/**
 	 * 自定义设置
@@ -40,37 +40,10 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 			@Override
 			public void click(NormalPreference normalPreference) {
 				DataCleanManager.clearAllCache(getActivity());
+				normalPreference.calCacheValue();
 			}
 		});
 
-		preference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object o) {
-				return false;
-			}
-		});
 	}
 
-
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-		if ("clean_cache".equals(s)) {
-			DataCleanManager.clearAllCache(getActivity());
-			preference.calCacheValue();
-		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-
-		getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-
-		getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-	}
 }
