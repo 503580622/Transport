@@ -1,5 +1,7 @@
 package com.jiahelogistic.net;
 
+import com.jiahelogistic.net.ProgressResponseBody.ProgressListener;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,8 +17,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-import com.jiahelogistic.net.ProgressResponseBody.ProgressListener;
-
 /**
  * Created by Huanling
  * On 2016/07/27 21:53.
@@ -24,17 +24,23 @@ import com.jiahelogistic.net.ProgressResponseBody.ProgressListener;
  * 带进度监听功能的辅助类
  */
 public class ProgressDownloader {
+	@SuppressWarnings({"unused"})
 	public static final String TAG = "ProgressDownloader";
 
 	private ProgressListener progressListener;
 	private String url;
 	private OkHttpClient client;
-	private File destination;
+	private String filePath;
 	private Call call;
 
-	public ProgressDownloader(String url, File destination, ProgressListener progressListener) {
+	/**
+	 * 真实文件
+	 */
+	private File trueFile;
+
+	public ProgressDownloader(String url, String filePath, ProgressListener progressListener) {
 		this.url = url;
-		this.destination = destination;
+		this.filePath = filePath;
 		this.progressListener = progressListener;
 		//在下载、暂停后的继续下载中可复用同一个client对象
 		client = getProgressClient();
@@ -81,20 +87,28 @@ public class ProgressDownloader {
 		});
 	}
 
+	@SuppressWarnings({"unused"})
 	public void pause() {
 		if(call!=null){
 			call.cancel();
 		}
 	}
 
+	private void setTrueFileFromUrl(String url) {
+		String fileTrueName = url.substring(url.lastIndexOf("/") + 1);
+		trueFile = new File(this.filePath + fileTrueName);
+		progressListener.onGetTrueFile(trueFile);
+	}
+
 	private void save(Response response, long startsPoint) {
+		setTrueFileFromUrl(response.networkResponse().request().url().toString());
 		ResponseBody body = response.body();
 		InputStream in = body.byteStream();
 		FileChannel channelOut = null;
 		// 随机访问文件，可以指定断点续传的起始位置
 		RandomAccessFile randomAccessFile = null;
 		try {
-			randomAccessFile = new RandomAccessFile(destination, "rwd");
+			randomAccessFile = new RandomAccessFile(trueFile, "rwd");
 			//Chanel NIO中的用法，由于RandomAccessFile没有使用缓存策略，直接使用会使得下载速度变慢，亲测缓存下载3.3秒的文件，用普通的RandomAccessFile需要20多秒。
 			channelOut = randomAccessFile.getChannel();
 			// 内存映射，直接使用RandomAccessFile，是用其seek方法指定下载的起始位置，使用缓存下载，在这里指定下载位置。

@@ -106,6 +106,38 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 		stack.push(this);
 	}
 
+	/**
+	 * 初始化view
+	 */
+	@Override
+	protected void initContentView() {
+
+	}
+
+	/**
+	 * 初始化控件
+	 */
+	@Override
+	protected void initView() {
+
+	}
+
+	/**
+	 * 设置监听器
+	 */
+	@Override
+	protected void setListener() {
+
+	}
+
+	/**
+	 * 自定义工具栏
+	 */
+	@Override
+	protected void setToolBar() {
+
+	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

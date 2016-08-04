@@ -3,6 +3,7 @@ package com.jiahelogistic;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.jiahelogistic.handler.CrashHandler;
 
@@ -16,6 +17,7 @@ import java.util.Stack;
  * 定义全局常量，处理全局异常
  */
 public class JiaHeLogistic extends Application {
+	private static final String TAG = "JiaHeLogistic";
 	/**
 	 * 应用上下文
 	 */
@@ -44,7 +46,7 @@ public class JiaHeLogistic extends Application {
 	/**
 	 * 新版本
 	 */
-	private File file;
+	private String filePath;
 
 	@Override
 	public void onCreate() {
@@ -56,7 +58,7 @@ public class JiaHeLogistic extends Application {
 
 		mStack = new Stack<>();
 
-		file = new File(getFilesDir().getAbsolutePath() + "/new_apk.apk");
+		filePath =getObbDir().getAbsolutePath() + "/";
 
 		// 注册全局异常处理器
 		//CrashHandler crashHandler = CrashHandler.getInstance();
@@ -111,7 +113,8 @@ public class JiaHeLogistic extends Application {
 		this.hasPromptNetwork = hasPromptNetwork;
 	}
 
-	public File getUpgradeFile() {
-		return file;
+	public String getUpgradeFilePath() {
+		Log.e(TAG, filePath);
+		return filePath;
 	}
 }

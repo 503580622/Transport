@@ -1,5 +1,6 @@
 package com.jiahelogistic.net;
 
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.MediaType;
@@ -34,6 +35,13 @@ public class ProgressResponseBody extends ResponseBody {
 		 * @param done 是否完成
 		 */
 		void update(long totalBytes, boolean done);
+
+		/**
+		 * 在获取文件真实名后调用
+		 *
+		 * @param fileTrueName 文件真实名
+		 */
+		void onGetTrueFile(File fileTrueName);
 	}
 
 	private final ResponseBody responseBody;

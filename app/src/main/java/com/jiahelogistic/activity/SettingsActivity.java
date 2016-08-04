@@ -20,15 +20,46 @@ public class SettingsActivity extends BasicAppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_settings);
+		Log.e("SettingActivity", stack.toString());
+	}
 
+	/**
+	 * 初始化view
+	 */
+	@Override
+	protected void initContentView() {
+		setContentView(R.layout.activity_settings);
+	}
+
+	/**
+	 * 初始化控件
+	 */
+	@Override
+	protected void initView() {
+		// 初始化Toolbar
 		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_common_activity_toolbar);
 		setSupportActionBar(toolbar);
 
+		// 设置界面
 		getFragmentManager().beginTransaction()
 				.replace(R.id.jh_ll_settings_content, new SettingsFragment())
 				.commit();
-		Log.e("SettingActivity", stack.toString());
+	}
+
+	/**
+	 * 设置监听器
+	 */
+	@Override
+	protected void setListener() {
+
+	}
+
+	/**
+	 * 自定义工具栏
+	 */
+	@Override
+	protected void setToolBar() {
+		
 	}
 
 	@Override

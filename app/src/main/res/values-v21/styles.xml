@@ -1,8 +1,9 @@
 <resources>
-	<style name="AppTheme.NoActionBar">
+	<style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="android:colorPrimaryDark">@color/colorPrimary</item>
 		<item name="windowActionBar">false</item>
+		<!-- 使用API Level 22 编译需要去掉前缀 -->
 		<item name="windowNoTitle">true</item>
-		<item name="android:windowDrawsSystemBarBackgrounds">true</item>
-		<item name="android:statusBarColor">@android:color/transparent</item>
+		<item name="android:windowNoTitle">true</item>
 	</style>
 </resources>

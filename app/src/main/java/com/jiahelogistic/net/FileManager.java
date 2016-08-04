@@ -103,14 +103,14 @@ public class FileManager {
 	 *
 	 * @param context 上下文
 	 * @param url 文件地址
-	 * @param file 下载的文件
+	 * @param filePath 下载的文件路径
 	 * @param handler 消息处理
 	 */
-	public static void downloadFileWithProgressBar(final Context context, String url, final File file,
+	public static void downloadFileWithProgressBar(final Context context, String url, final String filePath,
 	                                               final BasicNetworkHandler handler) {
 		assert url == null;
 		// 创建新的对话框
-		Dialog dialog = CustomDialog.createCommonScheduleProgressDialog(context, "已下载");
+		final Dialog dialog = CustomDialog.createCommonScheduleProgressDialog(context, "已下载");
 
 		// 进度条
 		final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.jh_dialog_schedule_progressBar);
@@ -120,7 +120,12 @@ public class FileManager {
 
 		// 开始下载，清空下载记录
 		final long breakPoints = 0L;
-		ProgressDownloader downloader = new ProgressDownloader(url, file, new ProgressResponseBody.ProgressListener() {
+		ProgressDownloader downloader = new ProgressDownloader(url, filePath, new ProgressResponseBody.ProgressListener() {
+
+			/**
+			 * 真实文件
+			 */
+			private File trueFile;
 
 			/**
 			 * 文件长度
@@ -136,6 +141,16 @@ public class FileManager {
 			public void onPreExecute(long contentLength) {
 				this.contentLength = contentLength;
 				progressBar.setMax((int) (contentLength / 1024));
+			}
+
+			/**
+			 * 设置真实文件
+			 *
+			 * @param trueFile 真实文件
+			 */
+			@Override
+			public void onGetTrueFile(File trueFile) {
+				this.trueFile = trueFile;
 			}
 
 			/**
@@ -163,11 +178,12 @@ public class FileManager {
 							.doOnCompleted(new Action0() {
 								@Override
 								public void call() {
-									if (file.getName().endsWith("apk")) {
+									dialog.dismiss();
+									if (trueFile.getName().endsWith("apk")) {
 										Intent install = new Intent();
 										install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 										install.setAction(android.content.Intent.ACTION_VIEW);
-										install.setDataAndType(Uri.fromFile(file),"application/vnd.android.package-archive");
+										install.setDataAndType(Uri.fromFile(trueFile),"application/vnd.android.package-archive");
 										context.startActivity(install);
 									} else {
 										Utils.showToast(context, "下载完成", Toast.LENGTH_SHORT);

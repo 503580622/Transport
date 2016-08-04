@@ -102,8 +102,34 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 
+
+		// 处理升级信息
+		Bundle bundle = getIntent().getExtras();
+		boolean isNeedUpgrade = bundle.getBoolean("isNeedUpgrade");
+		if (isNeedUpgrade) {
+			final UpgradeBean upgradeBean = bundle.getParcelable("upgrade");
+			assert upgradeBean != null;
+			Log.e(TAG, upgradeBean.toString());
+			// 升级提示
+			CustomDialog.upgradeProgressDialog(this, upgradeBean, mHandler);
+		}
+		//uploadFile();
+	}
+
+	/**
+	 * 初始化view
+	 */
+	@Override
+	protected void initContentView() {
+		setContentView(R.layout.activity_main);
+	}
+
+	/**
+	 * 初始化控件
+	 */
+	@Override
+	protected void initView() {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_common_activity_toolbar);
 		setSupportActionBar(toolbar);
 
@@ -140,8 +166,14 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 			changeSelectedTab(view, i, i == 0);
 			tab.setCustomView(view);
 		}
+	}
 
-		// 设置tab点击事件
+	/**
+	 * 设置监听器
+	 */
+	@Override
+	protected void setListener() {
+// 设置tab点击事件
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
@@ -160,18 +192,14 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 
 			}
 		});
+	}
 
-		// 处理升级信息
-		Bundle bundle = getIntent().getExtras();
-		boolean isNeedUpgrade = bundle.getBoolean("isNeedUpgrade");
-		if (isNeedUpgrade) {
-			final UpgradeBean upgradeBean = bundle.getParcelable("upgrade");
-			assert upgradeBean != null;
-			Log.e(TAG, upgradeBean.toString());
-			// 升级提示
-			CustomDialog.upgradeProgressDialog(this, upgradeBean, mHandler);
-		}
-		//uploadFile();
+	/**
+	 * 自定义工具栏
+	 */
+	@Override
+	protected void setToolBar() {
+
 	}
 
 	/**

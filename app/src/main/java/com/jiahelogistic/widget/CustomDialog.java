@@ -268,7 +268,7 @@ public class CustomDialog extends Dialog {
 				// 开启下载新版本
 				dialogInterface.dismiss();
 				FileManager.downloadFileWithProgressBar(context,
-						upgradeBean.getUrl(), app.getUpgradeFile(), handler);
+						upgradeBean.getUrl(), app.getUpgradeFilePath(), handler);
 			}
 		});
 		builder.setNegativeButton("下次再说", new DialogInterface.OnClickListener() {

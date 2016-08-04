@@ -64,15 +64,39 @@ public class LoginAppCompatActivity extends BasicAppCompatActivity implements Lo
 	private EditText mPasswordView;
 	private View mProgressView;
 	private View mLoginFormView;
+	private Button mEmailSignInButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-		// Set up the login form.
-		mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-		populateAutoComplete();
 
+		populateAutoComplete();
+	}
+
+	/**
+	 * 初始化view
+	 */
+	@Override
+	protected void initContentView() {
+		setContentView(R.layout.activity_login);
+	}
+
+	/**
+	 * 初始化控件
+	 */
+	@Override
+	protected void initView() {
+		mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+		mEmailSignInButton =  (Button) findViewById(R.id.email_sign_in_button);
+		mLoginFormView = findViewById(R.id.login_form);
+		mProgressView = findViewById(R.id.login_progress);
+	}
+
+	/**
+	 * 设置监听器
+	 */
+	@Override
+	protected void setListener() {
 		mPasswordView = (EditText) findViewById(R.id.password);
 		mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			@Override
@@ -85,17 +109,19 @@ public class LoginAppCompatActivity extends BasicAppCompatActivity implements Lo
 			}
 		});
 
-		Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
 		mEmailSignInButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				attemptLogin();
 			}
 		});
+	}
 
-		mLoginFormView = findViewById(R.id.login_form);
-		mProgressView = findViewById(R.id.login_progress);
-
+	/**
+	 * 自定义工具栏
+	 */
+	@Override
+	protected void setToolBar() {
 
 	}
 

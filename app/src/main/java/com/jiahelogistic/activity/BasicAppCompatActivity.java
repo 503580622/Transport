@@ -34,12 +34,37 @@ public abstract class BasicAppCompatActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 
 		loadToStack();
+
+		initContentView();
+		initView();
+		setListener();
+		setToolBar();
 	}
 
 	/**
 	 * 子类实现，用于activity栈管理
 	 */
 	protected abstract void loadToStack();
+
+	/**
+	 * 初始化view
+	 */
+	protected abstract void initContentView();
+
+	/**
+	 * 初始化控件
+	 */
+	protected abstract void initView();
+
+	/**
+	 * 设置监听器
+	 */
+	protected abstract void setListener();
+
+	/**
+	 * 自定义工具栏
+	 */
+	protected abstract void setToolBar();
 
 	/**
 	 * 友盟+Session统计
