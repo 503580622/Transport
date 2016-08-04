@@ -1,15 +1,12 @@
 package com.jiahelogistic.activity;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,19 +26,10 @@ import com.jiahelogistic.bean.UpgradeBean;
 import com.jiahelogistic.config.SystemConfig;
 import com.jiahelogistic.handler.BasicNetworkHandler;
 import com.jiahelogistic.net.FileManager;
-import com.jiahelogistic.net.ProgressDownloader;
-import com.jiahelogistic.net.ProgressResponseBody;
 import com.jiahelogistic.utils.Utils;
 import com.jiahelogistic.widget.CustomDialog;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.logging.Handler;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 
 /**
  * Created by Li Huanling
@@ -73,18 +60,14 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	private BasicNetworkHandler mHandler = new BasicNetworkHandler(app) {
 		@Override
 		public void handleMessage(Message msg) {
-			// 优先交给父类处理
-			switch (msg.what) {
-				case SystemConfig.UPDATE_DOWNLOAD_PROGRESS:
-					String string = String.format(getString(R.string.jh_schedule_progress_content), msg.arg1) + "%";
-					textView.setText(string);
-					break;
 
+			switch (msg.what) {
 				case SystemConfig.SYSTEM_RESET_EXIT_FLAG:
 					exitFlag = false;
 					break;
 
 				default:
+					// 父类处理
 					super.handleMessage(msg);
 					break;
 			}
@@ -112,40 +95,9 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	private TabLayout tabLayout;
 
 	/**
-	 * 断点记录
-	 */
-	private long breakPoints;
-
-	/**
-	 * 下载辅助类
-	 */
-	private ProgressDownloader downloader;
-
-	/**
-	 * 下载的文件
-	 */
-	private File file;
-
-	/**
-	 * 已下载文件长度
-	 */
-	private long totalBytes;
-
-	/**
-	 * 文件总长度
-	 */
-	private long contentLength;
-
-	/**
-	 * 进度条
-	 */
-	private ProgressBar progressBar;
-
-	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	private ViewPager mViewPager;
-	private TextView textView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -217,97 +169,9 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 			assert upgradeBean != null;
 			Log.e(TAG, upgradeBean.toString());
 			// 升级提示
-			CustomDialog.Builder builder = new CustomDialog.Builder(this);
-			builder.setTitle("有可用的升级！");
-			builder.setMessage(upgradeBean.getDescription());
-			builder.setPositiveButton("马上升级", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
-					// 开启下载新版本
-					dialogInterface.dismiss();
-					startDownloadFile(upgradeBean.getUrl());
-				}
-			});
-			builder.setNegativeButton("下次再说", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialogInterface, int i) {
-					dialogInterface.dismiss();
-					Toast.makeText(MainAppCompatActivity.this, "点击了取消", Toast.LENGTH_SHORT).show();
-				}
-			});
-			builder.create().show();
+			CustomDialog.upgradeProgressDialog(this, upgradeBean, mHandler);
 		}
 		//uploadFile();
-	}
-
-	/**
-	 * 开始下载文件
-	 *
-	 * @param url 新文件下载地址
-	 */
-	private void startDownloadFile(String url) {
-		assert url == null;
-		// 创建新的对话框
-		Dialog dialog = CustomDialog.createCommonScheduleProgressDialog(this, "已下载");
-
-		// 进度条
-		progressBar = (ProgressBar) dialog.findViewById(R.id.jh_dialog_schedule_progressBar);
-
-		// 文字信息
-		textView = (TextView) dialog.findViewById(R.id.jh_dialog_schedule_content);
-
-		// 开始下载，清空下载记录
-		breakPoints = 0L;
-		file = new File(getFilesDir().getAbsolutePath() + "/newVersion.apk");
-		downloader = new ProgressDownloader(url, file, new ProgressResponseBody.ProgressListener() {
-
-			/**
-			 * 在开始下载前调用，设置文件的长度，只调用一次
-			 *
-			 * @param contentLength 文件长度
-			 */
-			@Override
-			public void onPreExecute(long contentLength) {
-				MainAppCompatActivity.this.contentLength = contentLength;
-				Log.e(TAG, String.valueOf(contentLength));
-				progressBar.setMax((int) (contentLength / 1024));
-			}
-
-			/**
-			 * 更新文件下载进度
-			 *
-			 * @param totalBytes 已下载的长度
-			 * @param done       是否完成
-			 */
-			@Override
-			public void update(long totalBytes, boolean done) {
-				totalBytes = totalBytes + breakPoints;
-				MainAppCompatActivity.this.totalBytes = totalBytes;
-				progressBar.setProgress((int) (totalBytes / 1024));
-
-				// 通知主线程更新文本进度
-				Message msg = Message.obtain();
-				msg.what = SystemConfig.UPDATE_DOWNLOAD_PROGRESS;
-				msg.arg1 = (int) Math.floor(totalBytes * 100 / contentLength);
-				mHandler.sendMessage(msg);
-				Log.e(TAG, String.valueOf(totalBytes));
-
-				// 下载完成
-				if (done) {
-					// 切换到主线程
-					rx.Observable.empty().observeOn(AndroidSchedulers.mainThread())
-							.doOnCompleted(new Action0() {
-								@Override
-								public void call() {
-									Utils.showToast(MainAppCompatActivity.this, "完成下载", Toast.LENGTH_SHORT);
-								}
-							}).subscribe();
-				}
-
-			}
-		});
-		downloader.download(0L);
-		dialog.show();
 	}
 
 	/**

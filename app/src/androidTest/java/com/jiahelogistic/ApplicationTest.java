@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Stack;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -127,5 +128,15 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
 			cacheSize = "未知";
 		}
 		Log.e(TAG, "清除缓存后有:" + cacheSize);
+	}
+
+	/**
+	 * 测试Stack
+	 */
+	public void testStack() {
+		Stack<String> stack = new Stack<>();
+		stack.push("haha");
+		stack.push("huohuo");
+		Log.e(TAG, stack.firstElement());
 	}
 }

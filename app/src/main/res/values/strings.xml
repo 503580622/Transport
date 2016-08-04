@@ -100,5 +100,7 @@
 	<string name="jh_preference_qr_desc">QR code</string>
 	<string name="jh_site_url" translatable="false">jiahelogistic.com</string>
 	<string name="jh_title_activity_about">About</string>
+	<string name="jh_preference_upgrade">Upgrade</string>
+	<string name="jh_preference_upgrading">Getting message of newest version</string>
 
 </resources>

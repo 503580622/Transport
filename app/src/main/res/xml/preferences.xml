@@ -16,6 +16,10 @@
 			android:key="clean_cache"
 			android:title="@string/jh_settings_clear_cache"/>
 
+		<Preference
+			android:key="upgrade"
+			android:title="@string/jh_preference_upgrade"/>
+
 		<PreferenceScreen
 			android:title="@string/jh_preference_about">
 			<intent

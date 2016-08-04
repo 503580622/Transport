@@ -11,8 +11,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.jiahelogistic.JiaHeLogistic;
 import com.jiahelogistic.R;
+import com.jiahelogistic.bean.UpgradeBean;
+import com.jiahelogistic.handler.BasicNetworkHandler;
+import com.jiahelogistic.net.FileManager;
 
 /**
  * Created by Huanling
@@ -21,6 +26,8 @@ import com.jiahelogistic.R;
  * 自定义对话框
  */
 public class CustomDialog extends Dialog {
+
+	private static JiaHeLogistic app = JiaHeLogistic.getInstance();
 
 	/**
 	 * 创建通用的等待对话框
@@ -248,5 +255,29 @@ public class CustomDialog extends Dialog {
 			dialog.setContentView(layout);
 			return dialog;
 		}
+	}
+
+	public static void upgradeProgressDialog(final Context context, final UpgradeBean upgradeBean,
+	                                        final BasicNetworkHandler handler) {
+		CustomDialog.Builder builder = new CustomDialog.Builder(context);
+		builder.setTitle("有可用的升级！");
+		builder.setMessage(upgradeBean.getDescription());
+		builder.setPositiveButton("马上升级", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				// 开启下载新版本
+				dialogInterface.dismiss();
+				FileManager.downloadFileWithProgressBar(context,
+						upgradeBean.getUrl(), app.getUpgradeFile(), handler);
+			}
+		});
+		builder.setNegativeButton("下次再说", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				dialogInterface.dismiss();
+				Toast.makeText(context, "点击了取消", Toast.LENGTH_SHORT).show();
+			}
+		});
+		builder.create().show();
 	}
 }

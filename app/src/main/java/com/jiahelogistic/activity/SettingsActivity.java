@@ -4,6 +4,7 @@ package com.jiahelogistic.activity;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.jiahelogistic.R;
 import com.jiahelogistic.fragment.SettingsFragment;
@@ -27,11 +28,14 @@ public class SettingsActivity extends BasicAppCompatActivity {
 		getFragmentManager().beginTransaction()
 				.replace(R.id.jh_ll_settings_content, new SettingsFragment())
 				.commit();
+		Log.e("SettingActivity", stack.toString());
 	}
 
 	@Override
 	protected void loadToStack() {
+		Log.e("SettingActivity", "Pushed");
 		stack.push(this);
+
 	}
 
 	@Override

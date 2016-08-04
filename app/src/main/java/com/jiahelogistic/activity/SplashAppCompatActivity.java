@@ -33,15 +33,6 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 	private static final int AUTO_START_MAIN_ACTIVITY = 1000;
 
 	private final BasicNetworkHandler mHandler = new BasicNetworkHandler(app) {
-		/**
-		 * 设置是否在主界面提示升级界面
-		 */
-		private boolean isNeedUpgrade = false;
-
-		/**
-		 * 升级信息，在isNeedUpgrade为true时有用
-		 */
-		private UpgradeBean bean;
 
 		@Override
 		public void handleMessage(Message msg) {
@@ -62,39 +53,10 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 					myStartActivity(intentIntroActivity);
 					break;
 
-				case SystemConfig.SYSTEM_CHECK_UPGRADE:
-					UpgradeBean bean = (UpgradeBean) msg.obj;
-					String versionName = Utils.getAppVersionName(this.app);
-					if (!TextUtils.equals(versionName, bean.getVersionName())) {
-						// TODO 有更新可用，判断是否在主页面，是就弹出升级提醒，否则就等待进入主页面再提醒
-						Log.e(TAG, stack.firstElement().getClass().getSimpleName());
-						String className = stack.firstElement().getClass().getSimpleName();
-						if ("SplashAppCompatActivity".equals(className)) {
-							// 处于启动界面，设置在主界面升级
-							isNeedUpgrade = true;
-							this.bean = bean;
-						}
-					}
-					break;
-
 				default:
 					// 处理网络连接失败
 					super.handleMessage(msg);
 			}
-		}
-
-		private void myStartActivity(Intent intent) {
-			Bundle bundle = new Bundle();
-			bundle.putBoolean("isNeedUpgrade", isNeedUpgrade);
-
-			// 是否需要升级
-			if (isNeedUpgrade) {
-				bundle.putParcelable("upgrade", bean);
-			}
-			intent.putExtras(bundle);
-			startActivity(intent);
-			// 不加入activity栈中，防止在主界面后退回到此界面
-			SplashAppCompatActivity.this.finish();
 		}
 	};
 

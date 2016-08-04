@@ -1,12 +1,22 @@
 package com.jiahelogistic.net;
 
-import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Message;
 import android.util.Log;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.jiahelogistic.JiaHeLogistic;
+import com.jiahelogistic.R;
 import com.jiahelogistic.bean.KeyValue;
 import com.jiahelogistic.config.NetConfig;
+import com.jiahelogistic.config.SystemConfig;
 import com.jiahelogistic.handler.BasicNetworkHandler;
+import com.jiahelogistic.utils.Utils;
+import com.jiahelogistic.widget.CustomDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +29,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 
 /**
  * @author Li Huanling.
@@ -84,5 +96,89 @@ public class FileManager {
 				handler.sendMessage(msg);
 			}
 		});
+	}
+
+	/**
+	 * 带进度条的下载
+	 *
+	 * @param context 上下文
+	 * @param url 文件地址
+	 * @param file 下载的文件
+	 * @param handler 消息处理
+	 */
+	public static void downloadFileWithProgressBar(final Context context, String url, final File file,
+	                                               final BasicNetworkHandler handler) {
+		assert url == null;
+		// 创建新的对话框
+		Dialog dialog = CustomDialog.createCommonScheduleProgressDialog(context, "已下载");
+
+		// 进度条
+		final ProgressBar progressBar = (ProgressBar) dialog.findViewById(R.id.jh_dialog_schedule_progressBar);
+
+		// 文字信息
+		final TextView textView = (TextView) dialog.findViewById(R.id.jh_dialog_schedule_content);
+
+		// 开始下载，清空下载记录
+		final long breakPoints = 0L;
+		ProgressDownloader downloader = new ProgressDownloader(url, file, new ProgressResponseBody.ProgressListener() {
+
+			/**
+			 * 文件长度
+			 */
+			private long contentLength = 0L;
+
+			/**
+			 * 在开始下载前调用，设置文件的长度，只调用一次
+			 *
+			 * @param contentLength 文件长度
+			 */
+			@Override
+			public void onPreExecute(long contentLength) {
+				this.contentLength = contentLength;
+				progressBar.setMax((int) (contentLength / 1024));
+			}
+
+			/**
+			 * 更新文件下载进度
+			 *
+			 * @param totalBytes 已下载的长度
+			 * @param done       是否完成
+			 */
+			@Override
+			public void update(long totalBytes, boolean done) {
+				totalBytes = totalBytes + breakPoints;
+				progressBar.setProgress((int) (totalBytes / 1024));
+
+				// 通知主线程更新文本进度
+				Message msg = Message.obtain();
+				msg.what = SystemConfig.UPDATE_DOWNLOAD_PROGRESS;
+				msg.obj = textView;
+				msg.arg1 = (int) Math.floor(totalBytes * 100 / contentLength);
+				handler.sendMessage(msg);
+
+				// 下载完成
+				if (done) {
+					// 切换到主线程
+					rx.Observable.empty().observeOn(AndroidSchedulers.mainThread())
+							.doOnCompleted(new Action0() {
+								@Override
+								public void call() {
+									if (file.getName().endsWith("apk")) {
+										Intent install = new Intent();
+										install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+										install.setAction(android.content.Intent.ACTION_VIEW);
+										install.setDataAndType(Uri.fromFile(file),"application/vnd.android.package-archive");
+										context.startActivity(install);
+									} else {
+										Utils.showToast(context, "下载完成", Toast.LENGTH_SHORT);
+									}
+								}
+							}).subscribe();
+				}
+
+			}
+		});
+		downloader.download(0L);
+		dialog.show();
 	}
 }

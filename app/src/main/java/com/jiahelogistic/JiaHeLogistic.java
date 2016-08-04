@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.jiahelogistic.handler.CrashHandler;
 
+import java.io.File;
 import java.util.Stack;
 
 /**
@@ -40,6 +41,11 @@ public class JiaHeLogistic extends Application {
 	 */
 	private boolean hasPromptNetwork = false;
 
+	/**
+	 * 新版本
+	 */
+	private File file;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -49,6 +55,8 @@ public class JiaHeLogistic extends Application {
 		mContext = getApplicationContext();
 
 		mStack = new Stack<>();
+
+		file = new File(getFilesDir().getAbsolutePath() + "/new_apk.apk");
 
 		// 注册全局异常处理器
 		//CrashHandler crashHandler = CrashHandler.getInstance();
@@ -101,5 +109,9 @@ public class JiaHeLogistic extends Application {
 	 */
 	public void setHasPromptNetwork(boolean hasPromptNetwork) {
 		this.hasPromptNetwork = hasPromptNetwork;
+	}
+
+	public File getUpgradeFile() {
+		return file;
 	}
 }
