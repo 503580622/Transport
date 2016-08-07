@@ -37,8 +37,8 @@ public abstract class BasicAppCompatActivity extends AppCompatActivity {
 
 		initContentView();
 		initView();
-		setListener();
 		setToolBar();
+		setListener();
 	}
 
 	/**

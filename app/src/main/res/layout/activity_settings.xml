@@ -19,5 +19,12 @@
 		android:orientation="vertical">
 
 	</LinearLayout>
+	<Button
+		android:layout_width="320dp"
+		android:layout_height="wrap_content"
+		android:text="@string/jh_btn_settings_exit"
+		android:id="@+id/jh_settings_activity_exit"
+		android:layout_gravity="center_horizontal"
+		android:background="#ff0000"/>
 
 </LinearLayout>

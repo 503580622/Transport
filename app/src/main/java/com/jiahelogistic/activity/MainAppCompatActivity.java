@@ -34,7 +34,7 @@ import java.io.File;
 /**
  * Created by Li Huanling
  * On 2016/07/17 16:23
- *
+ * <p/>
  * 主界面
  */
 public class MainAppCompatActivity extends BasicAppCompatActivity {
@@ -87,7 +87,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	/**
 	 * 设置布局资源数组
 	 */
-	private static int[] mLayoutIds = new int[] {R.layout.fragment_main, R.layout.fragment_ucenter};
+	private static int[] mLayoutIds = new int[]{R.layout.fragment_main, R.layout.fragment_ucenter};
 
 	/**
 	 * 标签布局
@@ -99,6 +99,11 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	 */
 	private ViewPager mViewPager;
 
+	/**
+	 * 工具栏
+	 */
+	private Toolbar toolbar;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -106,13 +111,15 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 
 		// 处理升级信息
 		Bundle bundle = getIntent().getExtras();
-		boolean isNeedUpgrade = bundle.getBoolean("isNeedUpgrade");
-		if (isNeedUpgrade) {
-			final UpgradeBean upgradeBean = bundle.getParcelable("upgrade");
-			assert upgradeBean != null;
-			Log.e(TAG, upgradeBean.toString());
-			// 升级提示
-			CustomDialog.upgradeProgressDialog(this, upgradeBean, mHandler);
+		if (bundle != null) {
+			boolean isNeedUpgrade = bundle.getBoolean("isNeedUpgrade");
+			if (isNeedUpgrade) {
+				final UpgradeBean upgradeBean = bundle.getParcelable("upgrade");
+				assert upgradeBean != null;
+				Log.e(TAG, upgradeBean.toString());
+				// 升级提示
+				CustomDialog.upgradeProgressDialog(this, upgradeBean, mHandler);
+			}
 		}
 		//uploadFile();
 	}
@@ -130,8 +137,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	 */
 	@Override
 	protected void initView() {
-		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_common_activity_toolbar);
-		setSupportActionBar(toolbar);
+		toolbar = (Toolbar) findViewById(R.id.jh_common_activity_toolbar);
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.jh_main_activity_container);
@@ -173,10 +179,13 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	 */
 	@Override
 	protected void setListener() {
-// 设置tab点击事件
+		// 设置tab点击事件
 		tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 			@Override
 			public void onTabSelected(TabLayout.Tab tab) {
+				// 设置工具栏
+				toolbar.setTitle(mTabTitles[tab.getPosition()]);
+
 				View view = tab.getCustomView();
 				changeSelectedTab(view, tab.getPosition(), true);
 			}
@@ -199,7 +208,11 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	 */
 	@Override
 	protected void setToolBar() {
+		// 初始化设置工具栏
+		toolbar.setTitle(mTabTitles[0]);
 
+
+		setSupportActionBar(toolbar);
 	}
 
 	/**
@@ -384,8 +397,6 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 					}
 				});
 			}
-			TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-			textView.setText(getString(R.string.jh_section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
 			return rootView;
 		}
 	}

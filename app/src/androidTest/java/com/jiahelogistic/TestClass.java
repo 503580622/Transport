@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.Environment;
 import android.test.InstrumentationTestCase;
 import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -96,5 +98,18 @@ public class TestClass extends InstrumentationTestCase {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void testGetSDPath(){
+		File dirPath;
+		boolean sdCardExist = Environment.getExternalStorageState()
+				.equals(android.os.Environment.MEDIA_MOUNTED); //判断sd卡是否存在
+		if (sdCardExist)
+		{
+			dirPath = Environment.getExternalStorageDirectory();//获取跟目录
+		} else {
+			dirPath = Environment.getDataDirectory();
+		}
+		Log.e("abc", dirPath.toString());
 	}
 }

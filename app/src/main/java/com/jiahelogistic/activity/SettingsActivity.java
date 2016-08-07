@@ -2,12 +2,14 @@ package com.jiahelogistic.activity;
 
 
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.jiahelogistic.R;
 import com.jiahelogistic.fragment.SettingsFragment;
+import com.jiahelogistic.utils.Utils;
 
 /**
  * Created by Li Huanling
@@ -16,11 +18,20 @@ import com.jiahelogistic.fragment.SettingsFragment;
  * 设置界面
  */
 public class SettingsActivity extends BasicAppCompatActivity {
+
+	/**
+	 * 工具栏
+	 */
+	private Toolbar toolbar;
+
+	/**
+	 * 退出按钮
+	 */
+	private Button exitButton;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Log.e("SettingActivity", stack.toString());
 	}
 
 	/**
@@ -37,8 +48,10 @@ public class SettingsActivity extends BasicAppCompatActivity {
 	@Override
 	protected void initView() {
 		// 初始化Toolbar
-		Toolbar toolbar = (Toolbar) findViewById(R.id.jh_common_activity_toolbar);
-		setSupportActionBar(toolbar);
+		toolbar = (Toolbar) findViewById(R.id.jh_common_activity_toolbar);
+		exitButton = (Button) findViewById(R.id.jh_settings_activity_exit);
+		exitButton.setText(String.format(getString(R.string.jh_btn_settings_exit),
+				getString(R.string.jh_app_name)));
 
 		// 设置界面
 		getFragmentManager().beginTransaction()
@@ -51,7 +64,19 @@ public class SettingsActivity extends BasicAppCompatActivity {
 	 */
 	@Override
 	protected void setListener() {
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				onBackPressed();
+			}
+		});
 
+		exitButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Utils.Exit();
+			}
+		});
 	}
 
 	/**
@@ -59,7 +84,8 @@ public class SettingsActivity extends BasicAppCompatActivity {
 	 */
 	@Override
 	protected void setToolBar() {
-		
+		toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+		setSupportActionBar(toolbar);
 	}
 
 	@Override

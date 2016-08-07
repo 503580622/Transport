@@ -1,5 +1,6 @@
 <resources>
 	<style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+		<!-- 导航栏背景颜色设置 -->
 		<item name="android:colorPrimaryDark">@color/colorPrimary</item>
 		<item name="windowActionBar">false</item>
 		<!-- 使用API Level 22 编译需要去掉前缀 -->

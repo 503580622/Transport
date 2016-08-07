@@ -30,7 +30,7 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 	/**
 	 * 设置自动跳转主界面的时间（默认3秒）
 	 */
-	private static final int AUTO_START_MAIN_ACTIVITY = 1000;
+	private static final int AUTO_START_MAIN_ACTIVITY = 3000;
 
 	private final BasicNetworkHandler mHandler = new BasicNetworkHandler(app) {
 
@@ -63,7 +63,6 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_splash);
 
 		// 开启新线程
 		new Thread() {
@@ -142,5 +141,13 @@ public class SplashAppCompatActivity extends BasicAppCompatActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		stack.remove(this);
+	}
+
+	/**
+	 * Take care of popping the fragment back stack or finishing the activity
+	 * as appropriate.
+	 */
+	@Override
+	public void onBackPressed() {
 	}
 }

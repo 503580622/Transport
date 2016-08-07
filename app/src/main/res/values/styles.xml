@@ -1,12 +1,16 @@
 <resources>
 
 	<style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
-		<item name="colorPrimaryDark">@color/colorPrimary</item>
 		<item name="windowActionBar">false</item>
 		<!-- 使用API Level 22 编译需要去掉前缀 -->
 		<item name="windowNoTitle">true</item>
 		<item name="android:windowNoTitle">true</item>
 	</style>
+
+	<style name="Splash" parent="AppTheme.Base">
+		<item name="android:windowBackground">@drawable/jh_splash_activity</item>
+	</style>
+
 	<!-- Base application theme. -->
 	<style name="AppTheme" parent="AppTheme.Base">
 		<!-- Customize your theme here. -->

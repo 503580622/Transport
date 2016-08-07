@@ -34,7 +34,7 @@ public class NetConfig {
 	/**
 	 * 连接根地址
 	 */
-	public static final String URL_HOST_ROOT = "http://10.0.2.2";
+	public static final String URL_HOST_ROOT = "http://www.lovejm.com";
 
 	/**
 	 * 异常文件上传地址

@@ -3,6 +3,8 @@ package com.jiahelogistic;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.os.Build;
+import android.os.Environment;
 import android.util.Log;
 
 import com.jiahelogistic.handler.CrashHandler;
@@ -18,6 +20,11 @@ import java.util.Stack;
  */
 public class JiaHeLogistic extends Application {
 	private static final String TAG = "JiaHeLogistic";
+
+	/**
+	 * Android 6.0
+	 */
+	private final int ANDROID_Marshmallow = 23;
 	/**
 	 * 应用上下文
 	 */
@@ -44,6 +51,11 @@ public class JiaHeLogistic extends Application {
 	private boolean hasPromptNetwork = false;
 
 	/**
+	 * SDK版本
+	 */
+	private int SDKVersion;
+
+	/**
 	 * 新版本
 	 */
 	private String filePath;
@@ -58,8 +70,9 @@ public class JiaHeLogistic extends Application {
 
 		mStack = new Stack<>();
 
-		filePath =getObbDir().getAbsolutePath() + "/";
+		filePath = getFilePath();
 
+		SDKVersion = initSDKVersion();
 		// 注册全局异常处理器
 		//CrashHandler crashHandler = CrashHandler.getInstance();
 		//crashHandler.init(getApplicationContext());
@@ -116,5 +129,23 @@ public class JiaHeLogistic extends Application {
 	public String getUpgradeFilePath() {
 		Log.e(TAG, filePath);
 		return filePath;
+	}
+
+	public String getFilePath(){
+		return getObbDir().getAbsolutePath() + "/";
+	}
+
+	/**
+	 * 设置系统版本
+	 * @return 系统版本
+	 */
+	private int initSDKVersion() {
+		int sdkVersion;
+		try {
+			sdkVersion = Build.VERSION.SDK_INT;
+		} catch (Exception e) {
+			sdkVersion = 0;
+		}
+		return sdkVersion;
 	}
 }

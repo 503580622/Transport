@@ -23,6 +23,7 @@ import okhttp3.ResponseBody;
  *
  * 带进度监听功能的辅助类
  */
+// TODO 下载安装APK有问题
 public class ProgressDownloader {
 	@SuppressWarnings({"unused"})
 	public static final String TAG = "ProgressDownloader";
@@ -113,7 +114,7 @@ public class ProgressDownloader {
 			channelOut = randomAccessFile.getChannel();
 			// 内存映射，直接使用RandomAccessFile，是用其seek方法指定下载的起始位置，使用缓存下载，在这里指定下载位置。
 			MappedByteBuffer mappedBuffer = channelOut.map(FileChannel.MapMode.READ_WRITE, startsPoint, body.contentLength());
-			byte[] buffer = new byte[1024];
+			byte[] buffer = new byte[512];
 			int len;
 			while ((len = in.read(buffer)) != -1) {
 				mappedBuffer.put(buffer, 0, len);

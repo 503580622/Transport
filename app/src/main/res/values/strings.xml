@@ -102,5 +102,6 @@
 	<string name="jh_title_activity_about">About</string>
 	<string name="jh_preference_upgrade">Upgrade</string>
 	<string name="jh_preference_upgrading">Getting message of newest version</string>
+	<string name="jh_btn_settings_exit">Exit %1$s</string>
 
 </resources>
