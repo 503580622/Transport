@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 /**
  * Created by Li Huanling on 2016/7/17 0017.
+ *
  * 检查网络状态
  */
 public class NetUtils {

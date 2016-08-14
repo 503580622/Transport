@@ -21,7 +21,8 @@ import java.util.Map;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by Li Huanling on 2016/07/11
+ * Created by Li Huanling on 2016/07/11.
+ *
  * volley连接管理
  */
 public class VolleyManager {

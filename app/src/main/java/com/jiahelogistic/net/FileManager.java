@@ -33,8 +33,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 
 /**
- * @author Li Huanling.
- * 2016/7/12 13:16
+ * @author Li Huanling on 2016/7/12 13:16.
+ *
  * 文件上传下载工具类，使用Okhttp3.2
  */
 public class FileManager {

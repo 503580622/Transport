@@ -13,8 +13,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 /**
- * Created by Li Huanling
- * On 2016/7/18 01:12.
+ * Created by Li Huanling on 2016/7/18 01:12.
  *
  * 普通工具类
  */

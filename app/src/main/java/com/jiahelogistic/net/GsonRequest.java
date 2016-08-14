@@ -16,8 +16,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
- * Created by Allen Lin on 2016/02/17.
+ * Created by Li Huanling on 2016/02/17 21:39.
+ *
+ * Gson请求
  */
+@SuppressWarnings({"unused"})
 public class GsonRequest<T> extends Request<T> {
 
 	private final Listener<T> mListener;

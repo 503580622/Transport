@@ -13,8 +13,7 @@ import java.io.File;
 import java.util.Stack;
 
 /**
- * Created by Li Huanling
- * On 2016/7/11 20:59.
+ * Created by Li Huanling on 2016/7/11 20:59.
  *
  * 定义全局常量，处理全局异常
  */

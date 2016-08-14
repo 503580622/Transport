@@ -7,6 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Created by Li Huanling on 2016/7/29 22:13.
+ *
+ * 导航界面
+ */
 public class SampleSlide extends Fragment {
 
     private static final String ARG_LAYOUT_RES_ID = "layoutResId";

@@ -7,8 +7,7 @@ import java.io.File;
 import java.math.BigDecimal;
 
 /**
- * Created by Li Huanling.
- * On 2016/08/02 11:05
+ * Created by Li Huanling on 2016/08/02 11:05.
  *
  * 计算清除缓存
  */

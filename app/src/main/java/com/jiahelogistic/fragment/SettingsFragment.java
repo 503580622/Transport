@@ -24,8 +24,7 @@ import com.jiahelogistic.widget.CustomDialog;
 import org.apache.http.message.BasicHeader;
 
 /**
- * Created by Huanling
- * On 2016/07/31 23:37.
+ * Created by Huanling on 2016/07/31 23:37.
  *
  * 设置片段
  */

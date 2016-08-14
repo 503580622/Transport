@@ -1,6 +1,5 @@
 package com.jiahelogistic.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -32,9 +31,8 @@ import com.jiahelogistic.widget.CustomDialog;
 import java.io.File;
 
 /**
- * Created by Li Huanling
- * On 2016/07/17 16:23
- * <p/>
+ * Created by Li Huanling on 2016/07/17 16:23
+ *
  * 主界面
  */
 public class MainAppCompatActivity extends BasicAppCompatActivity {

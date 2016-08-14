@@ -4,8 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Li Huanling
- * 2016/7/18 12:56.
+ * Created by Li Huanling on 2016/7/18 12:56.
  *
  * 应用升级信息
  */

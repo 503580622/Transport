@@ -12,8 +12,7 @@ import okio.Okio;
 import okio.Source;
 
 /**
- * Created by Huanling
- * On 2016/07/27 21:15.
+ * Created by Huanling on 2016/07/27 21:15.
  *
  * 下载进度监听
  */

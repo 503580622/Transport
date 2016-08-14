@@ -10,8 +10,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.Stack;
 
 /**
- * Created by Li Huanling
- * On 2016/07/09 16:42.
+ * Created by Li Huanling on 2016/07/09 16:42.
  *
  * 普通界面公共父类
  */

@@ -15,8 +15,7 @@ import com.jiahelogistic.net.NetUtils;
 import com.jiahelogistic.utils.Utils;
 
 /**
- * Created by Li Huanling
- * On 2016/07/12 23:15
+ * Created by Li Huanling on 2016/07/12 23:15
  *
  * splash界面
  */

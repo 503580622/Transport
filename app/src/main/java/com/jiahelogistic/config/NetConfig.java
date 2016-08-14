@@ -1,8 +1,7 @@
 package com.jiahelogistic.config;
 
 /**
- * Created by Li Huanling
- * On 2016/7/11 21:20.
+ * Created by Li Huanling on 2016/7/11 21:20.
  *
  * 网络配置，单例模式
  */

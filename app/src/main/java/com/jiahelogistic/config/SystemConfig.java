@@ -1,8 +1,7 @@
 package com.jiahelogistic.config;
 
 /**
- * Created by Li Huanling
- * On 2016/7/12 23:21.
+ * Created by Li Huanling on 2016/7/12 23:21.
  *
  * 系统常量
  */

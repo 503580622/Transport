@@ -26,7 +26,9 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * Created by Allen Lin on 2016/02/17.
+ * Created by Li Huanling on 2016/02/17.
+ *
+ * OkHttp3栈
  */
 public class OkHttp3Stack implements HttpStack {
 	private final OkHttpClient mClient;
@@ -118,7 +120,7 @@ public class OkHttp3Stack implements HttpStack {
 				return new ProtocolVersion("HTTP", 2, 0);
 		}
 
-		throw new IllegalAccessError("Unkwown protocol");
+		throw new IllegalAccessError("Unknown protocol");
 	}
 
 	@Override

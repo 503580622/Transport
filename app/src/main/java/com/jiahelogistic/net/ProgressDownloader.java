@@ -18,8 +18,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * Created by Huanling
- * On 2016/07/27 21:53.
+ * Created by Li Huanling on 2016/07/27 21:53.
  *
  * 带进度监听功能的辅助类
  */

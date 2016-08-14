@@ -12,8 +12,7 @@ import com.jiahelogistic.fragment.SettingsFragment;
 import com.jiahelogistic.utils.Utils;
 
 /**
- * Created by Li Huanling
- * On 2016/07/18 22:59
+ * Created by Li Huanling on 2016/07/18 22:59
  *
  * 设置界面
  */

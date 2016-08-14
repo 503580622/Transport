@@ -22,8 +22,7 @@ import com.jiahelogistic.widget.CustomDialog;
 import java.io.File;
 
 /**
- * Created by Li Huanling
- * On 2016/7/16 21:23.
+ * Created by Li Huanling on 2016/7/16 21:23.
  *
  * 基础的网络消息处理
  */

@@ -9,8 +9,7 @@ import com.jiahelogistic.JiaHeLogistic;
 import com.jiahelogistic.net.NetUtils;
 
 /**
- * Created by Li Huanling
- * On 2016/07/18 23:46.
+ * Created by Li Huanling on 2016/07/18 23:46.
  *
  * 网络状态监听
  */

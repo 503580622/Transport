@@ -1,5 +1,5 @@
 <resources>
-	<string name="jh_app_name">"Transport "</string>
+	<string name="jh_app_name">"Test"</string>
 
 	<!-- 状态 -->
 	<string name="jh_state_http_timeout">Timeout, please try later</string>

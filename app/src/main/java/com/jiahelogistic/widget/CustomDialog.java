@@ -128,8 +128,8 @@ public class CustomDialog extends Dialog {
 		/**
 		 * Set the Dialog message from resource
 		 *
-		 * @param message
-		 * @return
+		 * @param message 内容
+		 * @return this
 		 */
 		public Builder setMessage(int message) {
 			this.message = (String) context.getText(message);
@@ -139,8 +139,8 @@ public class CustomDialog extends Dialog {
 		/**
 		 * Set the Dialog title from resource
 		 *
-		 * @param title
-		 * @return
+		 * @param title 标题
+		 * @return this
 		 */
 		public Builder setTitle(int title) {
 			this.title = (String) context.getText(title);
@@ -150,8 +150,8 @@ public class CustomDialog extends Dialog {
 		/**
 		 * Set the Dialog title from String
 		 *
-		 * @param title
-		 * @return
+		 * @param title 标题
+		 * @return this
 		 */
 
 		public Builder setTitle(String title) {
@@ -167,8 +167,8 @@ public class CustomDialog extends Dialog {
 		/**
 		 * Set the positive button resource and it's listener
 		 *
-		 * @param positiveButtonText
-		 * @return
+		 * @param positiveButtonText 确定按钮
+		 * @return this
 		 */
 		public Builder setPositiveButton(int positiveButtonText,
 		                                 DialogInterface.OnClickListener listener) {

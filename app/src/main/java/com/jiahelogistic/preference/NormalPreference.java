@@ -11,8 +11,7 @@ import com.jiahelogistic.R;
 import com.jiahelogistic.utils.DataCleanManager;
 
 /**
- * Created by Huanling
- * On 2016/08/01 22:21.
+ * Created by Huanling on 2016/08/01 22:21.
  *
  * 自定义设置按钮，用来设置清除缓存等
  */

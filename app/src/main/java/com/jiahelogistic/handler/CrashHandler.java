@@ -27,8 +27,7 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Created by Li Huanling
- * On 2016/7/11 22:40.
+ * Created by Li Huanling on 2016/7/11 22:40.
  *
  * UncaughtException处理类,当程序发生Uncaught异常的时候,有该类来接管程序,并记录发送错误报告.
  */

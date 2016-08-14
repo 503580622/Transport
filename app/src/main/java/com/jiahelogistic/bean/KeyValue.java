@@ -1,8 +1,7 @@
 package com.jiahelogistic.bean;
 
 /**
- * Created by Li Huanling
- * On 2016/7/16 22:12.
+ * Created by Li Huanling on 2016/7/16 22:12.
  *
  * 键值对
  */
