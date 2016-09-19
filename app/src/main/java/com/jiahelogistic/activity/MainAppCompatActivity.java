@@ -37,6 +37,10 @@ import java.io.File;
  */
 public class MainAppCompatActivity extends BasicAppCompatActivity {
 
+	static {
+		System.loadLibrary("helloworld-lib");
+	}
+
 	/**
 	 * 设置标识
 	 */
@@ -119,6 +123,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 				CustomDialog.upgradeProgressDialog(this, upgradeBean, mHandler);
 			}
 		}
+		Utils.showToast(this, HelloWorld(), Toast.LENGTH_SHORT);
 		//uploadFile();
 	}
 
@@ -398,4 +403,6 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 			return rootView;
 		}
 	}
+
+	public native String HelloWorld();
 }

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
 	compileSdkVersion 24
-	buildToolsVersion "24.0.1"
+	buildToolsVersion "24.0.2"
 
 	defaultConfig {
 		applicationId "com.jiahelogistic"
@@ -10,6 +10,11 @@ android {
 		targetSdkVersion 24
 		versionCode 1
 		versionName "1.0"
+		externalNativeBuild {
+			cmake {
+				cppFlags ""
+			}
+		}
 	}
 	buildTypes {
 		release {
@@ -18,26 +23,23 @@ android {
 		}
 	}
 
-	packagingOptions {
-		exclude 'META-INF/maven/com.google.auto/auto-common/pom.xml'
-		exclude 'META-INF/maven/com.google.auto/auto-common/pom.properties'
-		exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
-		exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
-		exclude 'META-INF/maven/com.google.auto.service/auto-service/pom.xml'
-		exclude 'META-INF/maven/com.google.auto.service/auto-service/pom.properties'
-		exclude 'META-INF/services/javax.annotation.processing.Processor'
+	externalNativeBuild {
+		cmake {
+			path "CMakeLists.txt"
+		}
 	}
+
 }
 
 dependencies {
 	compile fileTree(include: ['*.jar'], dir: 'libs')
 	testCompile 'junit:junit:4.12'
-	compile 'com.android.support:appcompat-v7:24.1.1'
-	compile 'com.android.support:design:24.1.1'
+	compile 'com.android.support:appcompat-v7:24.2.1'
+	compile 'com.android.support:design:24.2.1'
 	compile 'com.google.code.gson:gson:2.7'
 	compile 'com.squareup.okhttp3:okhttp:3.4.0'
 	compile 'com.navercorp.volleyextensions:volley-views:2.0.1'
-	compile 'com.android.support:support-v4:24.1.1'
+	compile 'com.android.support:support-v4:24.2.1'
 	compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 	compile 'junit:junit:4.12'
 	compile 'com.umeng.analytics:analytics:6.0.1'
