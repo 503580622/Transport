@@ -6,6 +6,8 @@
 #define TRANSPORT_T_H
 
 #endif //TRANSPORT_T_H
+#include <android/log.h>
+
 
 class HelloWorld {
 public:

@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-	compileSdkVersion 24
-	buildToolsVersion "24.0.2"
+	compileSdkVersion 25
+	buildToolsVersion "25.0.0"
 
 	defaultConfig {
 		applicationId "com.jiahelogistic"
-		minSdkVersion 16
+		minSdkVersion 17
 		targetSdkVersion 24
 		versionCode 1
 		versionName "1.0"
@@ -34,12 +34,12 @@ android {
 dependencies {
 	compile fileTree(include: ['*.jar'], dir: 'libs')
 	testCompile 'junit:junit:4.12'
-	compile 'com.android.support:appcompat-v7:24.2.1'
-	compile 'com.android.support:design:24.2.1'
+	compile 'com.android.support:appcompat-v7:25.0.0'
+	compile 'com.android.support:design:25.0.0'
 	compile 'com.google.code.gson:gson:2.7'
 	compile 'com.squareup.okhttp3:okhttp:3.4.0'
 	compile 'com.navercorp.volleyextensions:volley-views:2.0.1'
-	compile 'com.android.support:support-v4:24.2.1'
+	compile 'com.android.support:support-v4:25.0.0'
 	compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 	compile 'junit:junit:4.12'
 	compile 'com.umeng.analytics:analytics:6.0.1'

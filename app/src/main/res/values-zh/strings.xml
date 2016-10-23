@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="jh_app_name">测试</string>
+	<string name="jh_app_name">佳合国际物流</string>
 
 	<!-- 状态 -->
 	<string name="jh_state_http_timeout">连接超时，请稍后再试！</string>

@@ -38,6 +38,8 @@ import java.io.File;
 public class MainAppCompatActivity extends BasicAppCompatActivity {
 
 	static {
+		System.loadLibrary("stdc++");
+		System.loadLibrary("GLESv3");
 		System.loadLibrary("helloworld-lib");
 	}
 
@@ -126,6 +128,7 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		Utils.showToast(this, HelloWorld(), Toast.LENGTH_SHORT);
 		//uploadFile();
 	}
+
 
 	/**
 	 * 初始化view
