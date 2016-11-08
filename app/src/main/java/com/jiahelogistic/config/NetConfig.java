@@ -45,4 +45,6 @@ public class NetConfig {
 	 */
 	public static final String URL_UPLOAD_APP = URL_HOST_ROOT + "/checkUpgrade.php";
 
+	public static final String URL_IM = "http://127.0.0.1:7610";
+
 }

@@ -1,4 +1,4 @@
-package com.jiahelogistic.preference;
+package com.jiahelogistic.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

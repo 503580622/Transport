@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,8 @@ import com.jiahelogistic.bean.UpgradeBean;
 import com.jiahelogistic.config.SystemConfig;
 import com.jiahelogistic.handler.BasicNetworkHandler;
 import com.jiahelogistic.net.FileManager;
+import com.jiahelogistic.net.Socket.IM;
+import com.jiahelogistic.service.NotifyService;
 import com.jiahelogistic.utils.Utils;
 import com.jiahelogistic.widget.CustomDialog;
 
@@ -112,7 +115,6 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-
 		// 处理升级信息
 		Bundle bundle = getIntent().getExtras();
 		if (bundle != null) {
@@ -127,6 +129,8 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 		}
 		Utils.showToast(this, HelloWorld(), Toast.LENGTH_SHORT);
 		//uploadFile();
+
+		startService(new Intent(this, NotifyService.class));
 	}
 
 
@@ -400,6 +404,22 @@ public class MainAppCompatActivity extends BasicAppCompatActivity {
 						// 启动设置界面
 						Intent intent = new Intent(activity, SettingsActivity.class);
 						activity.startActivity(intent);
+					}
+				});
+			} else {
+				Button mButton = (Button) rootView.findViewById(R.id.jh_main_btn_test);
+
+				mButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						new Thread() {
+							@Override
+							public void run() {
+								IM im = new IM();
+								Log.e("Socket", "String from server: " + im.start());
+							}
+						}.start();
+
 					}
 				});
 			}

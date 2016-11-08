@@ -1,27 +1,17 @@
 package com.jiahelogistic.fragment;
 
 import android.app.Dialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.provider.ContactsContract;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jiahelogistic.JiaHeLogistic;
 import com.jiahelogistic.R;
 import com.jiahelogistic.handler.BasicNetworkHandler;
 import com.jiahelogistic.net.NetUtils;
-import com.jiahelogistic.preference.NormalPreference;
+import com.jiahelogistic.widget.NormalPreference;
 import com.jiahelogistic.utils.DataCleanManager;
-import com.jiahelogistic.utils.Utils;
 import com.jiahelogistic.widget.CustomDialog;
-
-import org.apache.http.message.BasicHeader;
 
 /**
  * Created by Huanling on 2016/07/31 23:37.

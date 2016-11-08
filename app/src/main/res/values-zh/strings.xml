@@ -39,5 +39,7 @@
 	<string name="jh_preference_upgrade">检查新版本</string>
 	<string name="jh_preference_upgrading">正在获取最新版本信息...</string>
 	<string name="jh_btn_settings_exit">退出%1$s</string>
+	<string name="jh_settings_allow_notify">允许通知</string>
+	<string name="jh_settings_allow_notify_desc">允许通知</string>
 
 </resources>

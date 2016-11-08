@@ -41,8 +41,8 @@
 		</activity>
 		<activity
 			android:name=".activity.SplashAppCompatActivity"
-			android:theme="@style/Splash"
-			android:configChanges="orientation|keyboardHidden|screenSize">
+			android:configChanges="orientation|keyboardHidden|screenSize"
+			android:theme="@style/Splash">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
@@ -59,8 +59,7 @@
 			android:label="@string/jh_title_activity_settings"
 			android:theme="@style/AppTheme.NoActionBar">
 		</activity>
-		<activity
-			android:name=".activity.IntroAppActivity">
+		<activity android:name=".activity.IntroAppActivity">
 		</activity>
 
 		<!-- Broadcast -->
@@ -78,6 +77,11 @@
 			android:label="@string/jh_title_activity_about"
 			android:theme="@style/AppTheme.NoActionBar">
 		</activity>
+
+		<service
+			android:name=".service.NotifyService"
+			android:exported="false">
+		</service>
 	</application>
 
 </manifest>

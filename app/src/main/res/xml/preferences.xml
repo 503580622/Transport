@@ -8,11 +8,18 @@
 	    android:defaultValue="true"
 		/>
 
+	<SwitchPreference
+		android:key="jh_settings_allow_notify"
+		android:title="@string/jh_settings_allow_notify"
+		android:summary="@string/jh_settings_allow_notify_desc"
+		android:defaultValue="true"
+	/>
+
 	<PreferenceCategory
 		android:title="@string/jh_settings_common_label"
 		android:key="pref_key_storage_settings">
 
-		<com.jiahelogistic.preference.NormalPreference
+		<com.jiahelogistic.widget.NormalPreference
 			android:key="clean_cache"
 			android:title="@string/jh_settings_clear_cache"/>
 
